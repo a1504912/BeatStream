@@ -1,73 +1,90 @@
 """Read the cabinet SCORE counter frame by frame from the user-supplied recording.
 
-The recording is a PERFECT play (1,000,000 points, 724 Fantastic). Every
-judgment adds 1,000,000/724, so the displayed score reveals the cumulative
-judgment count. A monotone Viterbi pass over all frames chooses the count
-whose rendered digits best match glyph templates harvested from the same
-video. Output: score-steps.json with the frame time of each increase.
+The recording is a PERFECT play (1,000,000 points, 724 Fantastic): every
+judgment adds 1,000,000/724, so the displayed score is a cumulative judgment
+count. Each frame is decoded as the count k whose rendered seven digits best
+match glyphs from the same video (summed per-cell correlation), so one
+occluded digit cannot change the reading; low-scoring frames are dropped. Accepted counts are then
+forced monotone. Output: score-steps.json (frame time of each increase).
 """
 import argparse,json
 from pathlib import Path
 import cv2,numpy as np
 p=argparse.ArgumentParser();p.add_argument('video',type=Path);p.add_argument('--out',type=Path,required=True)
 p.add_argument('--total',type=int,default=724);a=p.parse_args();a.out.mkdir(parents=True,exist_ok=True)
-cap=cv2.VideoCapture(str(a.video));fps=cap.get(cv2.CAP_PROP_FPS);T=a.total
-X0,PITCH,W,Y0,Y1=466.5,25.2,24,1,40
+X0,PITCH,W=466.5,25.2,24;T=a.total
+valid={str(round(k*1e6/T)):k for k in range(1,T+1)}
 def cells(frame):
-    hsv=cv2.cvtColor(frame[0:44,455:640],cv2.COLOR_BGR2HSV);m=np.pad(((hsv[...,2]>150)&(hsv[...,1]<80)).astype(np.float32),((0,0),(0,12)))
-    out=[]
-    for k in range(7):
-        x=int(round(X0+PITCH*k))-455;out.append(m[Y0:Y1,max(0,x-2):x+W+2])
-    return out
-frames,times=[],[];i=0
+    hsv=cv2.cvtColor(frame[0:44,455:640],cv2.COLOR_BGR2HSV)
+    m=np.pad(((hsv[...,2]>150)&(hsv[...,1]<80)).astype(np.float32),((0,0),(0,12)))
+    return [m[1:40,int(round(X0+PITCH*k))-457:int(round(X0+PITCH*k))-455+W+2] for k in range(7)]
+cap=cv2.VideoCapture(str(a.video));fps=cap.get(cv2.CAP_PROP_FPS);frames,times=[],[];i=0
 while True:
     ok,f=cap.read()
     if not ok:break
     t=i/fps;i+=1
     if 11.0<=t<=148.0:frames.append(cells(f));times.append(t)
-cap.release()
-def text(k):
-    s=str(round(k*1e6/T)).rjust(7);return s
-def match(c,tpl):
-    # best shift within ±2 px; templates are W wide, cells W+4 wide
-    best=-1
-    for dx in range(0,c.shape[1]-tpl.shape[1]+1):
-        x=c[:,dx:dx+tpl.shape[1]];a1=x-x.mean();b=tpl-tpl.mean();d=np.sqrt((a1*a1).sum()*(b*b).sum())
-        v=(a1*b).sum()/d if d>1e-6 else (1.0 if x.sum()<3 and tpl.sum()<3 else 0.0)
-        best=max(best,v)
+cap.release();times=np.array(times)
+# seed glyphs: four frames whose scores were read by eye
+seed={30.0:'0071823',62.0:'0323204',100.0:'0709944',120.0:'0856353'}
+def glyphs(samples):
+    out={}
+    for cs,text in samples:
+        lead=len(text)-len(text.lstrip('0'))
+        for j,(c,ch) in enumerate(zip(cs,text)):
+            if j>=lead:out.setdefault(ch,[]).append(c[:,2:2+W])
+    return {k:np.mean(v,0) for k,v in out.items()}
+def corr(c,g):
+    best=-1.0;b=g-g.mean();nb=np.sqrt((b*b).sum())
+    for dx in range(5):
+        x=c[:,dx:dx+W];xa=x-x.mean();d=np.sqrt((xa*xa).sum())*nb
+        if d>0:best=max(best,float((xa*b).sum()/d))
     return best
-# bootstrap glyphs from frames whose counts were read by eye
-known={30.0:52,62.0:234,61.1:228,61.2:229}
-tpl={}
-def harvest(idx,k):
-    for c,ch in zip(frames[idx],text(k)):
-        tpl.setdefault(ch,[]).append(c[:,2:2+W])
-for v,k in known.items():harvest(int(np.argmin(abs(np.array(times)-v))),k)
-def build():return {ch:np.mean(v,axis=0) for ch,v in tpl.items()}
+DIGITS='0123456789'
+TEXT=[str(round(k*1e6/T)).rjust(7,'0') for k in range(T+1)]
+def per_cell(cs,G):
+    # returns (7, 11) table: correlation with digits 0-9 and 'blank' (index 10)
+    tab=np.zeros((7,11))
+    for j,c in enumerate(cs):
+        empty=c[:,3:-3].sum()<25
+        tab[j,10]=1.0 if empty else 0.0
+        for d,ch in enumerate(DIGITS):tab[j,d]=0.0 if empty else corr(c,G[ch])
+    return tab
+def decode(tab):
+    best=None
+    for k,text in enumerate(TEXT):
+        lead=len(text)-len(text.lstrip('0')) if k else 7
+        s=sum(tab[j,10] if j<lead else tab[j,int(ch)] for j,ch in enumerate(text))
+        if best is None or s>best[0]:best=(s,k)
+    return best
+G=glyphs([(frames[int(np.argmin(abs(times-v)))],s) for v,s in seed.items()])
 for rnd in range(2):
-    G=build();N=len(frames)
-    # emission: per frame per k; only score digits that have templates
-    em=np.full((N,T+1),-1e9,dtype=np.float32);cache={}
-    for n,c in enumerate(frames):
-        per=[{ch:match(c[j],g) for ch,g in G.items()} for j in range(7)]
-        for k in range(T+1):
-            s=text(k);em[n,k]=sum(per[j].get(ch,0.3) for j,ch in enumerate(s))
-    # monotone Viterbi with max step 12 per frame
-    dp=em[0].copy();back=np.zeros((N,T+1),dtype=np.int32)
-    for n in range(1,N):
-        best=np.full(T+1,-1e18);arg=np.zeros(T+1,dtype=np.int32)
-        for d in range(13):
-            cand=np.full(T+1,-1e18);cand[d:]=dp[:T+1-d]-0.15*d
-            upd=cand>best;best[upd]=cand[upd];arg[upd]=(np.arange(T+1)-d)[upd]
-        dp=best+em[n];back[n]=arg
-    path=np.zeros(N,dtype=np.int32);path[-1]=int(np.argmax(dp))
-    for n in range(N-1,0,-1):path[n-1]=back[n,path[n]]
-    # harvest all digits from confident frames for the next round
-    conf=[n for n in range(N) if em[n,path[n]]>6.3];tpl={}
-    for n in conf[::3]:harvest(n,int(path[n]))
-    print(json.dumps({'round':rnd,'final':int(path[-1]),'confidentFrames':len(conf),'frames':N,'glyphs':sorted(tpl)}),flush=True)
+    decoded=[decode(per_cell(cs,G)) for cs in frames]
+    good=[(n,k) for n,(s,k) in enumerate(decoded) if s>=7*0.62]
+    G=glyphs([(frames[n],str(round(k*1e6/T)).rjust(7,'0')) for n,k in good[::4] if k>0])
+    print(json.dumps({'round':rnd,'accepted':len(good),'frames':len(frames)}),flush=True)
+# 3 and 8 differ only in their left stroke; with 724 judgments, k and k+362
+# share the lower six digits, so resolve that one ambiguity by continuity.
+HALF=T//2;est=0;fixed=[]
+for n,k in good:
+    options=[c for c in (k,k-HALF,k+HALF) if 0<=c<=T]
+    c=min(options,key=lambda c:abs(c-est))
+    if abs(c-est)<=40:fixed.append((n,c));est=c
+good=fixed
+# monotone count per frame: longest non-decreasing chain of accepted readings
+ns=[n for n,_ in good];ks=[k for _,k in good];import bisect
+tails,tidx,prev=[],[],[-1]*len(ks)
+for j,k in enumerate(ks):
+    pos=bisect.bisect_right(tails,k)
+    if pos==len(tails):tails.append(k);tidx.append(j)
+    else:tails[pos]=k;tidx[pos]=j
+    prev[j]=tidx[pos-1] if pos else -1
+chain=[];j=tidx[-1]
+while j>=0:chain.append(j);j=prev[j]
+chain=chain[::-1];kept=[(ns[j],ks[j]) for j in chain]
 steps=[]
-for n in range(1,len(path)):
-    if path[n]>path[n-1]:steps.append({'time':times[n],'frame':round(times[n]*fps),'count':int(path[n]),'delta':int(path[n]-path[n-1]),'match':float(em[n,path[n]])})
-(a.out/'score-steps.json').write_text(json.dumps({'fps':fps,'total':T,'final':int(path[-1]),'steps':steps,'perFrame':[[round(t,4),int(k),round(float(em[n,k]),3)] for n,(t,k) in enumerate(zip(times,path))]},separators=(',',':')))
-print(json.dumps({'steps':len(steps),'final':int(path[-1]),'deltaHistogram':np.bincount([s['delta'] for s in steps]).tolist()}))
+for (n0,k0),(n1,k1) in zip(kept[:-1],kept[1:]):
+    if k1>k0:steps.append({'time':float(times[n1]),'previousReading':float(times[n0]),'gapFrames':n1-n0,'count':k1,'delta':k1-k0})
+(a.out/'score-steps.json').write_text(json.dumps({'fps':fps,'total':T,'final':kept[-1][1],'accepted':len(good),'monotone':len(kept),'steps':steps},separators=(',',':')))
+gaps=np.array([s['gapFrames'] for s in steps])
+print(json.dumps({'steps':len(steps),'final':kept[-1][1],'rejectedAsNonMonotone':len(good)-len(kept),'deltaHistogram':np.bincount([s['delta'] for s in steps]).tolist(),'stepsWithGap>1frame':int((gaps>1).sum())}))

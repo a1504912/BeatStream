@@ -19,7 +19,7 @@
 - 同步遊戲預覽：播放、暫停、0.5×／0.75× 慢速、任意跳轉；修改音符立即更新。
 - 在預覽中點選音符，或在時間軸選取音符並查看到點前的畫面；到點音效可切換。
 
-選歌頁目前顯示 `天ノ弱`、`パ→ピ→プ→Yeah!`、`CHERNOBOG · VIDEO` 、`ロストワンの号哭` 和 `回レ！雪月花` 五首影片參考曲。`天ノ弱` 附使用者提供的乾淨 MP3 剪接；前三首保留既有錄影音軌。選曲與難度後按「編輯譜面」即可進入。舊曲與已儲存資料保留，但不再顯示；後續依使用者提供的實機影片製作並加入 `videoReference: true` 的參考曲。
+選歌頁目前顯示 `最終鬼畜妹フランドール・S`、`天ノ弱`、`パ→ピ→プ→Yeah!`、`CHERNOBOG · VIDEO` 、`ロストワンの号哭` 和 `回レ！雪月花` 六首影片參考曲。`天ノ弱` 附使用者提供的乾淨 MP3 剪接；前三首保留既有錄影音軌。選曲與難度後按「編輯譜面」即可進入。舊曲與已儲存資料保留，但不再顯示；後續依使用者提供的實機影片製作並加入 `videoReference: true` 的參考曲。
 
 LIGHT 沿用原譜節奏點，減少密度與同時押，以單顆點擊及少量長按為主。舊歌曲不必重傳；LIGHT 可獨立編輯及儲存至雲端。
 
@@ -59,6 +59,7 @@ JSON 版本 3 的節點可帶 `curve: {x,y}`，代表通往下一節點的控制
 | `dist/client/chernobog-song.js`、`chernobog-chart.json` | CHERNOBOG 影片參考版與辨識方法／音符來源 |
 | `dist/client/papipu-song.js`、`papipu-chart.json` | パ→ピ→プ→Yeah! 影片參考版、長按與路徑核對記錄 |
 | `dist/client/amanojaku-song.js`、`amanojaku-chart.json` | 天ノ弱 影片參考譜與乾淨 MP3 剪接時間對照 |
+| `dist/client/flandre-song.js`、`flandre-chart.json` | 最終鬼畜妹フランドール・S 影片參考譜、街機剪接與計分核對 |
 | `dist/server/index.js` | Cloudflare Worker 音樂與譜面 API |
 | `tools/` | 譜面分析與驗證程式 |
 
@@ -94,6 +95,7 @@ node tools/test-chernobog.cjs
 node tools/test-papipu.cjs
 node tools/test-amanojaku.cjs
 node tools/test-setsugekka.cjs
+node tools/test-flandre.cjs
 ```
 
 也可用 `BEATSTREAM_CANVAS_MODULE` 指定既有 Canvas 模組的位置。
@@ -123,3 +125,11 @@ node tools/test-setsugekka.cjs
 歷史成績以可信任使用者身分保存於 D1 `DB`，歌曲與音檔繼續使用既有 R2 `BUCKET`。新資料表定義在 `db/schema.ts`，Drizzle 產生的 `drizzle/` 由 Sites 發布時套用；不可在正式請求內建立資料表。前端 `score-history.js` 的快取只提供畫面更新，雲端是持久資料來源。同步失敗可在選歌頁重試，相同場次 ID 不會重複保存。啟用前沒有保存分數，因此只能累積新成績。
 
 預覽的 SQLite 存在 `.sites-runtime/preview-scores.sqlite`，不會上傳正式資料。執行 `node tools/test-score-history.mjs` 驗證成績排序、身分／歌曲／難度隔離、正式完成、AUTO／中途離開排除、重試、重新載入及競態處理；原生 Canvas 路徑可用既有 `BEATSTREAM_CANVAS_MODULE` 指定。
+
+## 最終鬼畜妹フランドール・S
+
+`最終鬼畜妹フランドール・S`（ビートまりお／COOL&CREATE）依使用者提供的 360p／29.97 fps BEAST Lv10 PERFECT 錄影製作，曲目 ID `flandre-video`。另附 206 秒 320k MP3；`tools/flandre/build_audio.py CLEAN_MP3 --output dist/client/audio/flandre-clean.mp3` 只讀取乾淨 MP3，依 `audio-edit.json` 剪去 8、40、8 小節（200 BPM、對齊拍點）成 135 秒街機長度，`verify_audio.py VIDEO EDITED_MP3` 以 52 個窗格比對錄影音軌（最大誤差 0.12 ms）。音軌不含錄影打擊聲。
+
+錄影為 1,000,000 分、724 Fantastic、740 COMBO。BEAST 720 顆（507 點擊、123 縮圈、53 方塊、32 長按、5 條 STREAM），NORMAL 453 顆，LIGHT 由 NORMAL 自動簡化。所有到點都在 200 BPM 十六分格線上；結尾保留六方向同時長按。`tools/flandre/read_score.py` 逐幀讀取 SCORE（每次判定 +1,000,000/724），用來核對數量：長按於放開時判定，STREAM 只算一次判定但每個節點加 COMBO。仍有 4 次判定找不到可信的影像音符，沒有自行補造。
+
+`python3 tools/flandre/build_chart.py` 由已核對的 `reviewed.json` 重建成品，不需要原影片；辨識流程與否決清單見 `tools/flandre/analysis/` 與 `reviewed.json`。影片推估、八方向投影與 STREAM 路徑量測不是官方完整逐顆譜。

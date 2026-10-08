@@ -1,11 +1,11 @@
 const assert=require('node:assert/strict'),fs=require('node:fs');
-const files=['lostone-song.js','chernobog-song.js','papipu-song.js','amanojaku-song.js','setsugekka-song.js'];
+const files=['lostone-song.js','chernobog-song.js','papipu-song.js','amanojaku-song.js','setsugekka-song.js','flandre-song.js'];
 const source=fs.readFileSync('tools/test-chart-editor.cjs','utf8');
 const harness=source.slice(0,source.indexOf('(async()=>{'))
  .replace("'songs.js','reference-visuals.js'",`'songs.js',${files.map(f=>JSON.stringify(f)).join(',')},'reference-visuals.js'`);
 const {run,el}=new Function('require',harness+'return {run,el};')(require);
 const songs=JSON.parse(run('JSON.stringify(SONGS.filter(s=>s.videoReference))'));
-assert.equal(songs.length,5);
+assert.equal(songs.length,6);
 run('gamePlayfield.render=()=>{};hitSoundEnabled=false;');
 function reset(){run(`mode='playing';auto=false;combo=maxCombo=points=0;life=65;counts={perfect:0,great:0,miss:0};held.clear();fx=[];`)}
 // Complete actual game loops for every current song and difficulty, including
@@ -48,5 +48,5 @@ assert.equal(el('#score').textContent,'0000000');assert.doesNotMatch(el('#overla
  run(`mode='result';points=1000000;counts={perfect:3,great:0,miss:0};currentSong={id:'score-restart',title:'Restart',bpm:120,duration:8,file:'audio/restart.mp3',charts:{hard:[{t:2,end:2,lane:0,type:'tap'}]}};songBuffers.set(currentSong.id,{duration:8});$('#difficulty').value='hard';$('#auto').checked=false;`);
  await run('start()');assert.equal(run('mode'),'playing');assert.equal(run('points'),0);
  assert.equal(el('#score').textContent,'0000000');assert.equal(run('counts.perfect'),0);
- console.log('PASS exact 1,000,000 across five songs × three difficulties, HUD/results, custom-chart rounding, Great/Miss weights, long holds, repeat judgments, zero/empty charts and restart');
+ console.log('PASS exact 1,000,000 across six songs × three difficulties, HUD/results, custom-chart rounding, Great/Miss weights, long holds, repeat judgments, zero/empty charts and restart');
 })().catch(error=>{console.error(error);process.exitCode=1});

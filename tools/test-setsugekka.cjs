@@ -59,7 +59,7 @@ assert.deepEqual(difficulty.songNotes(song,'hard',{'setsugekka-video':{hard:{not
 assert.equal(JSON.stringify(song.charts),before);
 const html=fs.readFileSync('dist/client/index.html','utf8');
 assert.ok(html.indexOf('setsugekka-song.js')<html.indexOf('src="game.js'));
-assert.ok(html.includes('05 TRACKS'));
+assert.ok(html.includes('06 TRACKS'));
 const editorTest=fs.readFileSync('tools/test-chart-editor.cjs','utf8');
 const harness=editorTest.slice(0,editorTest.indexOf('(async()=>{'))
  .replace("'songs.js','reference-visuals.js'","'songs.js','setsugekka-song.js','reference-visuals.js'");
