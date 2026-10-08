@@ -59,3 +59,5 @@ official-nekoneko https://p.eagate.573.jp/game/beatstream/animtribe/p/music/imag
 amanojaku-video: jacket visible in the user-supplied BeatStream 天ノ弱 BEAST Lv09_480p.mp4 selection frame at 0 s; original jacket credit visible in that frame: 鳥越タクミ. Used in this private reference game.
 
 setsugekka-video: jacket shown in the user-supplied 【BeatStream】回レ！雪月花 BEAST_1080p.mp4 selection frame at 0 s. Cropped from that frame for this private reference game.
+
+flandre-video: jacket shown in the user-supplied BeatStream 最終鬼畜妹フランドール・S BEAST recording, selection frame at 2 s (Movie: TOHRU MiTSUHASHi × KAgaMI; jacket credit as shown in that frame). Cropped from that frame for this private reference game.

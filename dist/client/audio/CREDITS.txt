@@ -71,3 +71,12 @@ The 29.97 fps footage reference preserves reviewed hold groups and fixed Ripples
 square swipe notes are direction-free FLICK. It is approximate, not an official
 complete cabinet chart. Included for this private game; this soundtrack is
 separate from the MaouDamashii CC BY material above.
+
+flandre-clean.mp3 — 最終鬼畜妹フランドール・S / ビートまりお (COOL&CREATE)
+Built only from the user-supplied clean 320k MP3 (206.136 s). The arcade-length
+edit (135 s) removes three beat-aligned passages (8, 40 and 8 bars at 200 BPM)
+located by correlating against the user-supplied BEAST Lv10 recording; no
+recording audio or hit sounds are mixed in. Edit map and clock fit:
+tools/flandre/audio-edit.json. The chart is a footage reference from a 360p
+29.97 fps PERFECT play, not an official complete cabinet chart. Included for
+this private game; separate from the MaouDamashii CC BY material above.

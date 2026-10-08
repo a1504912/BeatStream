@@ -1,0 +1,18 @@
+{
+  "sourceAudio": "User-supplied 最終鬼畜妹フランドール・S 320k MP3",
+  "sourceAudioDuration": 206.136,
+  "sampleRate": 48000,
+  "outputDuration": 135.0,
+  "crossfadeSeconds": 0.024,
+  "bpm": 200,
+  "beatPhaseSeconds": 0.2875,
+  "segments": [
+    {"gameStart": 0, "gameEnd": 28.7875, "sourceStart": 0},
+    {"gameStart": 28.7875, "gameEnd": 67.7875, "sourceStart": 38.3875},
+    {"gameStart": 67.7875, "gameEnd": 86.9875, "sourceStart": 125.3875},
+    {"gameStart": 86.9875, "gameEnd": 135.0, "sourceStart": 154.1875}
+  ],
+  "videoClock": {"rate": 1.000086, "offset": -12.0936, "formula": "gameTime = rate * videoTime + offset"},
+  "waveformAnchors": {"segment1": {"videoRange": [12.6, 40.4], "medianSourceMinusVideo": -12.09133, "spread": 0.0021, "count": 13}, "segment2": {"videoRange": [41.3, 79.3], "medianSourceMinusVideo": -2.48844, "spread": 0.0029, "count": 18}, "segment3": {"videoRange": [80.2, 98.8], "medianSourceMinusVideo": 45.51412, "spread": 0.0014, "count": 9}, "segment4": {"videoRange": [99.4, 145.0], "medianSourceMinusVideo": 55.11687, "spread": 0.0036, "count": 22}},
+  "method": "Video audio is used only to locate the arcade edit. All output samples come from the supplied clean MP3. Band-limited (150-4000 Hz) 1 s waveform correlation gives four constant offsets whose differences are 9.6 s, 48.0 s and 9.6 s (8, 40 and 8 bars at 200 BPM); 50 ms correlation places each cut on a beat at source 28.7875 s, 77.3875 s and 144.5875 s. The recording's own fade matches the MP3's natural ending, so no extra fade is applied. This is a reconstruction of the arcade edit, not an official audio file."
+}
