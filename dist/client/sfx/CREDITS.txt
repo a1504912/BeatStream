@@ -1,0 +1,17 @@
+Sound samples: Kenney, CC0 1.0.
+https://kenney.nl/assets/impact-sounds
+https://kenney.nl/assets/interface-sounds
+https://creativecommons.org/publicdomain/zero/1.0/
+Adaptations: trimmed leading silence and long tails, normalized peak level, applied short fades, converted to mono PCM WAV.
+The original drum kit is synthesized in the game.
+
+Tutorial samples: user-provided 【BeatStream】Tutorial チュートリアル Arcade 20170831_720p60.mp4.
+Distinct Beat, Ripple, Slash, Long start and Long completion recording excerpts.
+Both conservative background-reduction and raw-recording short cuts are included.
+These are microphone recording excerpts, not isolated official game sound assets.
+See tutorial-source.json for timestamps and tools/tutorial/extract_sfx.py for reproducible processing.
+
+Rhythm / Pulse / Heavy kits: original deterministic percussion synthesis and short remixed attack layers from the bundled Kenney CC0 samples.
+No tutorial recording, voice, background music, reverb or melodic chord is used in these kits.
+15 sounds, 48 kHz mono PCM16, 1 ms attack / 9 ms tail fades, peak 0.78.
+See rhythm-source.json and tools/build-rhythm-sfx.py for the source layers and reproducible synthesis.

@@ -1,0 +1,50 @@
+/* A bright cabinet frame follows the selected song without moving its contents. */
+@property --selected-frame-angle{syntax:'<angle>';inherits:false;initial-value:0deg}
+.song-card[aria-pressed=true]{animation:selected-song-pulse 1.5s ease-in-out infinite;border-color:var(--yellow)}
+.song-card[aria-pressed=true]::before{content:'';position:absolute;inset:0;z-index:4;border:3px solid var(--yellow);pointer-events:none}
+@supports (mask-composite:exclude) or (-webkit-mask-composite:xor){
+ .song-card[aria-pressed=true]::before{
+  border:0;padding:4px;
+  background:conic-gradient(from var(--selected-frame-angle),#eab400 0deg,#ffd900 230deg,#fffbc2 270deg,#fff 290deg,#fff33b 315deg,#eab400 360deg);
+  -webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;
+  mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);mask-composite:exclude;
+  animation:selected-frame-travel 2.4s linear infinite;
+ }
+}
+@keyframes selected-song-pulse{
+ 0%,100%{box-shadow:0 0 0 1px #e8bc16,0 0 0 3px #ffd90020,0 0 8px #ffd90035,inset 0 0 0 2px #fff03f}
+ 50%{box-shadow:0 0 0 3px #fff33b,0 0 0 5px #ffe60080,0 0 26px #ffe600cc,inset 0 0 0 2px #fff}
+}
+@keyframes selected-frame-travel{to{--selected-frame-angle:360deg}}
+.arcade-bottom{align-self:stretch;min-height:0;max-height:100%;gap:12px;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:#58708c var(--surface)}
+.selection-actions{flex-shrink:0}
+.score-history{flex:0 0 auto;min-width:0;padding-top:10px;border-top:1px solid #49617d}
+.history-heading{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px}
+.history-heading h3{margin:0;font-family:var(--display-font);font-size:22px;font-style:italic;letter-spacing:.06em;color:var(--yellow);line-height:1.1}
+.history-difficulty{font-family:var(--display-font);font-size:14px;letter-spacing:.08em;background:var(--pink);color:white;padding:4px 9px}
+.score-history[data-difficulty=light] .history-difficulty{background:#49dbe3;color:var(--ink)}
+.score-history[data-difficulty=normal] .history-difficulty{background:var(--yellow);color:var(--ink)}
+.history-table{width:100%;border-collapse:collapse;background:#0b1b30;font-variant-numeric:tabular-nums}
+.history-table th{font-family:var(--display-font);font-size:14px;font-weight:700;letter-spacing:.025em;color:#b8cde3;padding:6px 10px;border-bottom:1px solid #49617d;white-space:nowrap}
+.history-table th:first-child{text-align:left;width:40px}.history-table th:not(:first-child){text-align:right}
+.history-table td{padding:4px 10px;height:30px;border-bottom:1px solid #ffffff12;line-height:1.15}
+.history-table tr:last-child td{border-bottom:0}
+.history-rank{font-family:var(--display-font);font-size:17px;color:#94aeca}
+.history-score{text-align:right;font-family:var(--display-font);font-size:22px;letter-spacing:.025em;color:#f0f7ff}
+.history-combo{text-align:right;font-family:var(--display-font);font-size:20px;color:var(--cyan)}
+.history-table tbody tr:first-child:not(.history-vacant){background:#fff03f0c}
+.history-table tbody tr:first-child:not(.history-vacant) .history-rank,.history-table tbody tr:first-child:not(.history-vacant) .history-score{color:var(--yellow)}
+.history-vacant .history-score,.history-vacant .history-combo{color:#56718f}
+.history-state{display:flex;align-items:center;justify-content:flex-end;gap:8px;min-height:20px;margin-top:4px;font-family:var(--display-font);font-size:14px;color:#a8bdd4;letter-spacing:.04em}
+.history-state button{min-height:32px;padding:4px 10px;font-size:14px;background:#183550;border:1px solid #587c9f;color:#ecf7ff}
+.history-state button[hidden]{display:none}
+@media(max-width:700px){
+ .arcade-bottom{max-height:43dvh;overflow-y:auto;gap:8px}
+ .score-history{padding-top:10px}.history-heading{margin-bottom:8px}.history-heading h3{font-size:20px}
+ .history-table th{padding:6px 8px}.history-table td{padding:6px 8px}
+ .history-score{font-size:22px}.history-combo{font-size:19px}
+}
+@media(prefers-reduced-motion:reduce){
+ .song-card[aria-pressed=true]{animation:none;box-shadow:0 0 0 2px var(--yellow),inset 0 0 0 2px var(--yellow)}
+ .song-card[aria-pressed=true]::before{animation:none}
+}

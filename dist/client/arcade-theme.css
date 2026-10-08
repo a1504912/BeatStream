@@ -1,0 +1,321 @@
+/* Japanese rhythm-cabinet theme. Layout and note timing stay in their own modules. */
+@font-face{font-family:Arcade;src:url('fonts/Arcade-Condensed.otf') format('opentype');font-weight:700 950;font-style:normal;font-display:swap}
+@font-face{font-family:Arcade;src:url('fonts/Arcade-CondensedItalic.otf') format('opentype');font-weight:700 950;font-style:italic;font-display:swap}
+@font-face{font-family:ArcadeDisplay;src:url('fonts/Arcade-Display.otf') format('opentype');font-weight:700 950;font-style:italic;font-display:swap}
+:root{
+ --pink:#f50092;--cyan:#00dfef;--yellow:#fff03f;
+ --ink:#101e39;--navy:#071326;--surface:#12233c;--edge:#425675;--muted:#a8bdd4;
+ --ui-font:'Noto Sans TC','Yu Gothic','Hiragino Kaku Gothic ProN','Microsoft JhengHei',Arial,sans-serif;
+ --display-font:Arcade,var(--ui-font);
+ color-scheme:dark;
+}
+html,body{background:var(--navy);font-family:var(--ui-font);font-size:16px}
+button,input,select{font-family:inherit}
+button{font-weight:700;transition:background .14s,border-color .14s,transform .14s}
+button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible{outline:3px solid var(--yellow);outline-offset:3px}
+button:disabled{cursor:default}
+dialog{color-scheme:dark}
+#cabinet{background:var(--navy)}
+#cabinet::before{border-color:#eaf5ff;box-shadow:none}
+
+/* Entrance: wordmark and controls have their own space, beside the game emblem. */
+#title-screen{
+ padding:clamp(24px,4vw,60px);gap:24px;
+ background:linear-gradient(115deg,transparent 0 63%,#00dfef0b 63% 80%,transparent 80%),
+ repeating-linear-gradient(135deg,transparent 0 39px,#ffffff05 39px 40px),#071326;
+}
+#title-screen::before{inset:16px;border:2px solid #d8e9fa;clip-path:polygon(0 0,calc(100% - 40px) 0,100% 40px,100% 100%,40px 100%,0 calc(100% - 40px))}
+#title-screen::after{top:16px;left:16px;width:25%;height:5px;background:var(--pink);box-shadow:none}
+.title-rail{font-family:var(--display-font);font-size:16px;letter-spacing:.13em;color:#b5c8dd}
+.title-rail strong{color:var(--cyan);font-weight:900}
+.title-content{
+ width:min(1180px,100%);grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);
+ grid-template-areas:'brand emblem' 'controls emblem';gap:30px 60px;justify-items:start;
+}
+.title-brand{grid-area:brand;text-align:left;align-self:end}
+.title-kicker{display:flex;align-items:center;gap:16px;margin:0 0 16px;color:var(--cyan);font-size:16px;font-weight:900;letter-spacing:.12em}
+.title-kicker::before{content:'';width:38px;height:5px;background:var(--yellow);transform:skew(-18deg)}
+#title-logo{font-family:ArcadeDisplay,var(--ui-font);font-size:clamp(54px,7.4vw,104px);letter-spacing:-.065em;line-height:1.05;text-shadow:3px 5px 0 #071326,5px 7px 0 #00dfef;white-space:nowrap;overflow-wrap:normal}
+#title-logo span{color:var(--pink);text-shadow:3px 5px 0 #071326,5px 7px 0 #fff}
+.title-edition{font-family:var(--display-font);font-size:22px;font-weight:900;letter-spacing:.23em;color:#e3effb;margin:20px 0 0;padding-left:0}
+.title-emblem{grid-area:emblem;align-self:center;width:100%;height:clamp(270px,38vw,430px)}
+.title-core{inset:8%;width:84%;height:84%;filter:drop-shadow(8px 8px 0 #0006)}
+.title-core .core-orbit{stroke:var(--cyan);opacity:.85}
+.title-note{width:clamp(52px,5.5vw,74px);filter:none}
+.title-note-a{left:0;top:16%}.title-note-b{right:0;top:4%}
+.title-note-c{left:6%;bottom:3%}.title-note-d{right:2%;bottom:7%}
+.title-controls{grid-area:controls;width:min(430px,100%);margin:0;align-self:start;gap:16px}
+#title-start{min-height:86px;padding:14px 22px;border:2px solid #fff;box-shadow:6px 6px 0 var(--cyan);background:var(--yellow);color:var(--ink);position:relative;overflow:hidden}
+#title-start::after{content:'';position:absolute;right:-20px;bottom:-8px;width:54px;height:42px;background:var(--pink);transform:skew(-25deg)}
+#title-start strong{font-family:var(--display-font);font-size:36px;font-weight:950;letter-spacing:.08em}
+#title-start small{font-size:16px;letter-spacing:.14em}
+#title-start:hover{background:#fff890;box-shadow:6px 6px 0 var(--cyan)}
+#title-start:active{transform:translate(3px,3px);box-shadow:3px 3px 0 var(--cyan)}
+.title-hint{color:#b6cae1;font-size:14px;text-align:left;line-height:1.5}
+.title-shortcuts{gap:10px}
+.title-shortcuts button{background:#142740;border-color:#5b7392;color:#eef6ff;font-size:16px;min-height:48px}
+.title-shortcuts button:hover{color:var(--navy);background:var(--cyan);border-color:var(--cyan)}
+.title-footer{text-align:left;font-family:var(--display-font);font-size:14px;color:#b6cae1;letter-spacing:.16em;border-top:1px solid #ffffff30;padding-top:14px}
+
+/* Music selection: white cabinet panels, navy labels, colored level blocks. */
+#overlay:has(.song-panel){background:repeating-linear-gradient(135deg,#071326 0 28px,#15263c 28px 31px);padding:18px}
+.panel.song-panel{background:#eaf0f7;color:var(--ink);border:2px solid #fff;outline:4px solid var(--cyan);outline-offset:-7px;box-shadow:8px 8px 0 #0006;clip-path:none;padding:24px;gap:16px}
+.arcade-top{padding-bottom:14px;border-bottom:3px solid var(--ink);gap:16px}
+.arcade-brand-group{gap:12px}
+.selection-home{background:var(--ink);border-color:var(--ink);color:white;box-shadow:3px 3px 0 var(--cyan)}
+.selection-home:hover{background:#244364;border-color:var(--ink)}
+.arcade-logo{font-family:ArcadeDisplay,var(--ui-font);font-size:clamp(30px,3.1vw,46px);font-weight:900;color:var(--ink);letter-spacing:-.065em;text-shadow:none;transform:none}
+.arcade-logo span{color:var(--pink);text-shadow:none}
+.arcade-logo small{font-family:var(--display-font);font-size:16px;color:var(--ink);letter-spacing:.15em;margin-left:20px;font-style:italic;line-height:1.2}
+.arcade-top-actions{gap:8px}
+.import-short{display:none}
+.track-count{font-family:var(--display-font);font-size:16px;color:#45617e;letter-spacing:.06em}
+.settings-open{border:1px solid #71859c;background:#fff;color:var(--ink);border-radius:0;min-height:44px;padding:10px 14px;font-size:14px}
+.settings-open:hover{color:var(--ink);background:#d0f8ff;border-color:#00a4bd}
+.arcade-top-actions [data-import-media]{background:var(--ink);border-color:var(--ink);color:white;box-shadow:3px 3px 0 var(--cyan)}
+.arcade-filters{gap:8px;padding-bottom:12px;border-bottom:0}
+.arcade-filters button{background:#d6e0ed!important;color:var(--ink)!important;border:1px solid #c0ccdb;font-size:14px;font-weight:900;min-height:44px;padding:10px 20px;clip-path:polygon(9px 0,100% 0,calc(100% - 9px) 100%,0 100%)}
+.arcade-filters button[aria-pressed=true]{background:var(--ink)!important;color:var(--yellow)!important;border-color:var(--ink);box-shadow:none}
+.arcade-filters button:hover{filter:none;background:#c2f8fc!important}
+.arcade-filters button[aria-pressed=true]:hover{background:#244364!important;color:var(--yellow)!important}
+.arcade-board{background:var(--navy);border:1px solid #b7c9db;padding:12px;scrollbar-color:#8299b0 #142740;scrollbar-gutter:stable}
+.song-list{gap:12px;grid-auto-rows:156px}
+.song-card{border:2px solid #6e829b;border-radius:0;background:#fff;color:var(--ink);min-height:156px;box-shadow:4px 4px 0 #0004;transform:none;transition:border-color .14s,background .14s}
+.song-card:hover{border-color:var(--cyan);background:#e9fbff}
+.song-card[aria-pressed=true]{background:#fffde2;border-color:var(--yellow);box-shadow:0 0 0 1px var(--yellow)}
+.song-card[aria-pressed=true]::after{width:4px;background:var(--pink)}
+.song-jacket{flex-basis:32%;border-color:#c1cddd;background:linear-gradient(135deg,#005d85,#10243c 60%,#ec008e);color:white}
+.song-jacket strong{font-family:var(--display-font);font-size:34px;letter-spacing:-.02em}
+.song-jacket small,.song-jacket em{font-size:12px;color:#fff}
+.card-information{padding:10px 12px;gap:4px}
+.card-category{font-family:var(--display-font);font-size:12px;font-weight:900;letter-spacing:.07em;color:#59728f}
+.card-title{font-size:18px;font-weight:900;line-height:1.35;color:var(--ink);-webkit-line-clamp:2}
+.card-artist{font-size:13px;color:#4f6680;line-height:1.4}
+.card-bottom{padding-top:6px;gap:6px}
+.grade-block small{color:#586f89;font-size:12px}
+.grade-block strong{color:#ce007a;font-family:var(--display-font);font-size:20px}
+.level-block{background:var(--pink);border:0;min-width:65px;padding:5px 8px;gap:0 6px;clip-path:polygon(0 0,100% 0,100% calc(100% - 8px),calc(100% - 8px) 100%,0 100%)}
+.level-block small{font-family:var(--display-font);font-size:12px;letter-spacing:.02em}
+.level-block strong{font-family:var(--display-font);font-size:30px;line-height:1}
+.level-block em{font-family:var(--display-font);font-size:12px;letter-spacing:.12em;line-height:1.3}
+.arcade-bottom{align-self:start;background:var(--surface);border:1px solid #506886;border-top:5px solid var(--cyan);color:#fff;padding:18px;gap:16px;overflow:hidden;scrollbar-gutter:auto;box-shadow:4px 4px 0 #0003}
+.selection-info{display:flow-root;flex:0 0 auto;min-height:0;max-height:none;overflow:visible;padding-right:0}
+.detail-eyebrow{font-family:var(--display-font);font-style:italic;letter-spacing:.12em;font-size:18px;color:var(--cyan);padding-bottom:8px;margin-bottom:10px;border-bottom:1px solid #58708c}
+#selected-cover{border:1px solid #8aa9cb;border-radius:0;width:64px;height:64px}
+.track-tag{font-family:var(--display-font);font-size:12px;color:#8ed9ed;letter-spacing:.07em}
+.selection-info h2{font-weight:900;color:white;font-size:clamp(22px,1.8vw,26px);line-height:1.35;margin:6px 0}
+.selection-info #track-artist{font-size:14px;color:#bacde1}
+.selection-meta{color:#c2d5e9;border-color:#49617d;font-size:14px;margin:12px 0 0;padding:10px 0;border-bottom:0}
+.selection-meta b{font-family:var(--display-font);font-size:24px;color:var(--yellow)}
+.selection-info #track-description{color:#c2d5e9;font-size:14px;line-height:1.7}
+.music-credit,.music-credit a{color:#9eb7d1;font-size:12px}
+.selection-info #track-description,.selection-info .music-credit{display:none}
+#official-tools,.selection-actions{border-color:#4c6582}
+.selection-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:0;padding-top:12px;padding-bottom:0}
+.selection-actions .options,.selection-actions #start,.selection-actions #load-status{grid-column:1/-1}
+.selection-actions .preview-button{margin:0!important;padding:10px 6px}
+.selection-actions #start{margin-top:0;min-height:70px;padding:10px}
+.selection-actions #load-status{margin:0}
+.selection-actions #load-status:empty{display:none}
+#official-page{color:var(--cyan);font-size:14px}
+#import-status,.video-help{color:#b1c5dd;font-size:12px}
+/* The media player shares the side panel; song metadata never scrolls on its own. */
+#official-preview{flex:1 1 120px;min-height:64px;max-height:168px;aspect-ratio:auto;margin:0;border-color:#67829d;border-radius:0}
+.arcade-bottom:has(#official-tools:not([hidden])){align-self:stretch;overflow-y:auto}
+.arcade-bottom:has(#official-tools:not([hidden])) .detail-eyebrow{display:none}
+#official-tools{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px;padding-top:10px}
+#official-tools .video-help{display:none}
+#official-page,#official-tools .import-label{position:relative;display:flex;align-items:center;justify-content:center;min-height:40px;margin:0;padding:6px;border:1px solid #6884a4;background:#203957;color:#eff7ff;font-size:12px;line-height:1.4;text-decoration:none;text-align:center;cursor:pointer}
+#official-page:hover,#official-tools .import-label:hover{background:#31557b;border-color:var(--cyan)}
+#official-tools .import-label:focus-within{outline:3px solid var(--yellow);outline-offset:2px}
+#official-tools .import-label input{position:absolute;width:1px;height:1px;margin:0;padding:0;opacity:0;clip-path:inset(50%)}
+#official-tools #import-status{grid-column:1/-1;margin:0;font-size:12px;line-height:1.5}
+.difficulty-control>span{font-family:var(--display-font);font-size:14px;color:#bbd0e8;letter-spacing:.08em}
+.difficulty-control{flex:1;min-width:0}
+.difficulty-buttons{display:grid;grid-template-columns:.9fr 1.2fr .9fr;background:#071326;border-color:#536c89;border-radius:0}
+.difficulty-buttons button{font-family:var(--display-font);font-size:16px;border-radius:0;color:#c2d5e9;min-height:40px;letter-spacing:.04em;padding:9px 6px}
+.difficulty-buttons button[aria-pressed=true]{background:var(--cyan);color:var(--ink)}
+.difficulty-buttons button[data-difficulty=light][aria-pressed=true]{background:var(--yellow);color:var(--ink)}
+.difficulty-buttons button[data-difficulty=hard][aria-pressed=true]{background:var(--pink);color:white}
+.selection-actions .options{font-size:14px;margin:0;gap:10px;flex-wrap:nowrap}
+.options input[type=checkbox]{accent-color:var(--cyan);width:18px;height:18px}
+.preview-button,.edit-chart-button{background:#203957!important;color:#eff7ff!important;border:1px solid #6884a4!important;border-radius:0;min-height:44px;font-size:14px}
+.preview-button:hover,.edit-chart-button:hover{background:#31557b!important;border-color:var(--cyan)!important}
+.song-panel .start{background:var(--yellow);color:var(--ink);border:2px solid #fff;border-radius:0;box-shadow:4px 4px 0 var(--cyan);padding:14px;margin-top:10px}
+.song-panel .start strong{font-family:var(--display-font);font-size:32px;letter-spacing:.06em}
+.song-panel .start small{font-size:12px;font-weight:700}
+.song-panel .start:hover{background:#fff794}
+.song-panel .start:disabled{background:#33465e;color:#b3c4d7;border-color:#536a83;box-shadow:none}
+#load-status{color:#fff18f;font-size:13px}
+.arcade-help{color:#526b86;border-color:#bbcbda;font-size:12px;padding-top:10px}
+
+/* Play HUD remains compact, with the same clear numeric typography. */
+#cabinet>header .brand{font-family:ArcadeDisplay,var(--ui-font);transform:none;color:white;text-shadow:3px 3px 0 var(--pink);letter-spacing:-.04em}
+.score strong{font-family:var(--display-font);font-weight:900;color:white;text-shadow:3px 3px 0 #00a2c5;letter-spacing:.03em;line-height:1}
+.score span{font-family:var(--display-font);color:var(--cyan);font-size:14px;letter-spacing:.14em}
+#combo{color:var(--yellow);text-shadow:2px 2px 0 #071326}
+#combo strong{font-family:var(--display-font);font-weight:900;letter-spacing:.02em}
+#combo small{font-family:var(--display-font);font-size:14px;color:var(--cyan);letter-spacing:.14em}
+.gauge{border-color:#fff;border-radius:0;background:var(--ink);color:white;box-shadow:none}
+.gauge>div{background:#263b54}.gauge i{background:linear-gradient(var(--yellow),var(--cyan));box-shadow:none}
+.speed{background:var(--navy);border-color:var(--cyan);border-radius:0;box-shadow:none}
+.speed span{font-family:var(--display-font);background:var(--cyan);color:var(--ink)}
+.speed strong{font-family:var(--display-font);font-size:23px}
+#cabinet>footer b{font-family:var(--display-font);text-shadow:2px 2px 0 var(--pink);letter-spacing:.04em}
+#cabinet>footer small{color:#b6d9ef;font-size:14px}
+#game-menu-toggle{background:#10233df2;border-color:#7c9dbc;border-left-color:var(--cyan);border-radius:0;box-shadow:none}
+
+/* Unified dialogs and controls. White header bands recall the cabinet faceplate. */
+#game-menu,#settings-dialog,#rules-dialog,#media-import,#chart-editor{
+ background:var(--navy);color:#edf5ff;border:2px solid #cbdced;border-top:5px solid var(--cyan);border-radius:0;box-shadow:8px 8px 0 #0005,0 24px 90px #0008;
+ scrollbar-color:#6c87a4 #12233c;
+}
+dialog::backdrop{background:#020913dc;backdrop-filter:blur(4px)}
+.game-menu-heading,.settings-heading,.rules-heading,.mi-heading,#chart-editor .ce-header{
+ background:#edf3fa;color:var(--ink);padding:16px;border:0;border-left:5px solid var(--pink);margin-bottom:18px;
+}
+.settings-heading h2,.rules-heading h2,.game-menu-heading h2,.mi-heading h2,#chart-editor .ce-header h2{color:var(--ink);font-weight:900;font-size:26px;margin:6px 0 0;line-height:1.35}
+.settings-heading .eyebrow,.game-menu-heading small,.rules-heading small,.mi-heading small,#chart-editor .ce-header small{font-family:var(--display-font);color:#006a86;font-size:14px;font-weight:900;letter-spacing:.1em}
+#chart-editor .ce-header p{color:#526d88;font-size:14px}
+#settings-close,#rules-close,#game-menu-close,#mi-close,#chart-editor #ce-close{background:var(--ink);color:#fff;border:0;border-radius:0;min-width:44px;height:44px}
+#game-menu .toolbar button,#settings-dialog button,#media-import button,#chart-editor button{border-radius:0;background:#203753;border-color:#637d9b;color:#f2f7ff;min-height:44px;font-size:14px}
+#game-menu .toolbar button:hover,#settings-dialog button:hover,#media-import button:hover,#chart-editor button:hover{background:#31567a;border-color:var(--cyan)}
+#game-menu #pause,#settings-dialog .settings-save,#media-import #mi-generate,#chart-editor .ce-primary{background:var(--yellow);color:var(--ink);border-color:var(--yellow);font-weight:900}
+#game-menu #pause:hover,#settings-dialog .settings-save:hover,#media-import #mi-generate:hover,#chart-editor .ce-primary:hover{background:#fff68a}
+#settings-dialog select,#chart-editor select{
+ appearance:none;background-color:#182d48;color:white;border:1px solid #6884a2;border-radius:0;
+ background-image:linear-gradient(45deg,transparent 50%,#00dfef 50%),linear-gradient(135deg,#00dfef 50%,transparent 50%);
+ background-position:calc(100% - 17px) 50%,calc(100% - 12px) 50%;background-size:5px 5px;background-repeat:no-repeat;padding-right:30px;
+}
+#settings-dialog option,#chart-editor option{background:#182d48;color:#fff}
+#settings-dialog label,#chart-editor label,.mi-fields label,.mi-density legend{color:#c8daee;font-size:14px}
+#settings-dialog input[type=range],#chart-editor input[type=range]{accent-color:var(--cyan)}
+.symbol-section{border-color:#3b5573}
+.symbol-section-title small{font-family:var(--display-font);color:var(--cyan);font-size:14px;letter-spacing:.08em}
+.symbol-section-title p,.symbol-heading small,.symbol-sound>label,.symbol-voice label,#effect-description,.timing-help,.settings-note,.settings-intro{color:#b9cce3;font-size:14px;line-height:1.7}
+.symbol-sound{background:var(--surface);border-color:#415d7f;border-top-color:var(--symbol-color)}
+.symbol-badge{text-shadow:none}.symbol-heading strong{font-weight:900}
+.settings-actions,.ce-footer{background:#071326f5;border-color:#536f91;backdrop-filter:blur(8px)}
+.keyboard-settings{border-color:#486280}.keyboard-settings summary{color:var(--cyan);font-weight:800}
+.wheel-center{color:#b9d2ea}.binding-key{background:#192e4a;color:#fff;border-color:#6b86a6;border-radius:0}
+.rule-card{background:var(--surface);border-color:#435e80;border-radius:0}
+.rule-card h3{font-weight:900}.rule-card p,.rules-intro,.rules-system p{color:#bed0e7;font-size:14px}
+.rule-card .rule-action{color:#5aebf5}.rule-card .rule-limit,.rules-foot{color:#9bb4cf}
+.rules-system{border-color:#435e80}.rules-system summary,.rules-system a{color:var(--cyan)}
+.game-menu-speed{background:#142c44;border-color:#5f7e9f;border-left-color:var(--cyan)}
+.game-menu-speed button{background:#203d5b;border-color:#6f9ab9;border-radius:0}
+.game-menu-speed output{font-family:var(--display-font);font-size:30px}
+#game-menu-track,.game-menu-speed-help,.game-menu-hint{color:#b9cce3;font-size:14px}
+.mi-target,.mi-help,#mi-status,#mi-result-note{color:#bed0e7;font-size:14px}
+.mi-drop{background:#122a44;border:2px dashed #5c9db4;border-radius:0}
+.mi-drop.is-dragging,.mi-drop:focus-within{background:#1b4561;border-color:var(--cyan)}
+.mi-drop>span:not(.mi-file-icon),.mi-drop small{color:#b2cfe6}
+.mi-fields input,#chart-editor input:not([type=range]):not([type=checkbox]){background:#152b47;border-color:#6581a2;border-radius:0;color:#fff;font-size:16px}
+.mi-density button[aria-pressed=true]{background:var(--cyan)!important;color:var(--ink)!important;border-color:var(--cyan)!important}
+.mi-steps li{font-size:14px;border-color:#4b6280;color:#a1b9d3}
+.mi-steps li.is-current{color:var(--cyan);border-color:var(--cyan)}
+.mi-summary{grid-template-columns:repeat(4,minmax(0,1fr));background:#152c45;border-color:#467693}.mi-summary b{font-family:var(--display-font);font-size:32px;color:var(--cyan)}
+.mi-actions{border-color:#4a6382}
+.ce-preview-panel{border-color:#526c8b;background:#0c1b2e}
+.ce-preview-heading{background:var(--surface);border-color:#526c8b}
+.ce-preview-heading small{font-family:var(--display-font);font-size:14px;color:var(--cyan);letter-spacing:.08em}
+.ce-preview-viewport{border-color:#6b8da9;box-shadow:none}
+.ce-preview-options>span{color:#c7daf0;border-color:#617998}
+.ce-preview-guide p,.ce-hint,.ce-transport span,.ce-inspector p{color:#b4c9e3;font-size:14px}
+.ce-inspector,.ce-timeline{background:var(--surface);border-color:#4c6889}
+#ce-save{color:var(--cyan)!important;border-color:#5490a6!important}
+.ce-footer>span{color:#fff5a0}
+.panel:not(.song-panel){background:var(--surface);border-color:var(--cyan);box-shadow:6px 6px 0 #0005;color:#fff}
+.panel:not(.song-panel) h1{font-family:var(--display-font);letter-spacing:-.01em}
+#toast{background:var(--ink);border-color:var(--cyan);color:#f3faff;font-size:14px}
+
+/* Keep the existing fixed-height phone selection flow: list above, actions below. */
+@media(max-width:1100px){.arcade-logo small{display:block;font-size:14px;margin:4px 0 0}.title-content{gap:26px 36px}.title-edition{font-size:20px}}
+@media(max-width:700px){
+ #title-screen{padding:24px 26px;gap:18px}
+ #title-screen::before{inset:9px}#title-screen::after{top:9px;left:9px}
+ .title-rail{font-size:14px;letter-spacing:.06em}
+ .title-content{grid-template-columns:minmax(0,1fr);grid-template-areas:'emblem' 'brand' 'controls';gap:20px;justify-items:center;width:min(440px,100%)}
+ .title-emblem{width:min(300px,100%);height:clamp(165px,25dvh,220px)}
+ .title-core{inset:4%;width:92%;height:92%}.title-note{width:48px}
+ .title-brand{text-align:center}.title-kicker{justify-content:center;font-size:14px;gap:10px;margin-bottom:12px}.title-kicker::before{width:24px;height:4px}
+ #title-logo{font-size:clamp(38px,10.8vw,68px);letter-spacing:-.07em;text-shadow:2px 3px 0 #071326,3px 4px 0 var(--cyan)}
+ #title-logo span{text-shadow:2px 3px 0 #071326,3px 4px 0 white}
+ .title-edition{font-size:18px;margin-top:12px;letter-spacing:.18em}
+ .title-controls{width:100%;gap:14px}.title-hint{text-align:center}
+ #title-start{min-height:78px}#title-start strong{font-size:32px}
+ .title-shortcuts button{min-height:46px;font-size:16px}.title-footer{text-align:center;font-size:13px}
+ #overlay:has(.song-panel){padding:6px}
+ .panel.song-panel{padding:12px;gap:10px;outline-width:2px;outline-offset:-4px}
+ .arcade-top{gap:10px;padding-bottom:10px;border-bottom-width:2px}
+ .arcade-brand-group .arcade-logo{font-size:30px;letter-spacing:-.065em;overflow-wrap:normal}
+ .arcade-logo small{font-size:14px;letter-spacing:.12em;margin-top:4px}
+ .arcade-top-actions{gap:6px}.settings-open{font-size:14px;min-height:42px;padding:8px}
+ .import-full{display:none}.import-short{display:inline}.arcade-top-actions [data-import-media]{white-space:nowrap}
+ .arcade-filters{padding-bottom:0;gap:5px}
+ .arcade-filters button{min-height:42px;font-size:14px;padding:9px 14px;clip-path:none}
+ .selection-workspace{gap:10px}
+ .arcade-board{padding:7px}.song-list{gap:8px;grid-auto-rows:110px}
+ .song-card{min-height:110px;height:110px}.song-jacket{flex-basis:27%;padding:8px 4px}
+ .song-jacket strong{font-size:28px}.song-jacket small,.song-jacket em{font-size:10px}
+ .card-information{padding:7px 8px;gap:2px}.card-category{font-size:11px;letter-spacing:.025em}
+ .card-title{font-size:16px;line-height:1.2;flex-shrink:0}.card-artist{font-size:12px;line-height:1.15;flex-shrink:0}
+ .card-bottom{gap:4px;padding-top:3px}.grade-block{gap:4px}.grade-block small{font-size:11px}.grade-block strong{font-size:18px}
+ .level-block{display:flex;align-items:center;justify-content:center;min-width:52px;height:30px;padding:3px 5px;gap:4px}.level-block strong{font-size:25px}.level-block small{display:none}.level-block em{font-size:10px;letter-spacing:.035em}
+ .arcade-bottom{display:flex;padding:10px;gap:8px;border-top-width:3px}
+ .selection-info{flex:0 0 auto;min-height:0;max-height:none}
+ .detail-eyebrow{font-size:16px;padding-bottom:6px;margin-bottom:7px}
+ #selected-cover{width:48px;height:48px}.selection-info h2{font-size:20px;margin:6px 0}.selection-info #track-artist{font-size:13px}
+ .selection-meta{font-size:12px;margin:8px 0;padding:8px 0}.selection-meta b{font-size:20px}
+ .selection-actions{padding-top:8px}.difficulty-control>span{font-size:12px;margin-bottom:4px}
+ .difficulty-buttons button{min-height:38px;font-size:14px;padding:7px 3px}
+ .selection-actions .options{font-size:13px;margin:0;gap:6px;flex-wrap:nowrap;align-items:center}
+ .selection-actions .options>label{white-space:nowrap;font-size:11px}
+ .selection-actions #start{padding:8px;min-height:52px;box-shadow:3px 3px 0 var(--cyan);margin-top:0}
+ .song-panel .start strong{font-size:27px}.song-panel .start small{font-size:12px}
+ #cabinet>footer small{font-size:12px}.score span,#combo small{font-size:12px}
+ .game-menu-heading,.settings-heading,.rules-heading,.mi-heading,#chart-editor .ce-header{padding:12px;margin-bottom:14px}
+ .settings-heading h2,.rules-heading h2,.game-menu-heading h2,.mi-heading h2,#chart-editor .ce-header h2{font-size:22px}
+}
+@media(max-height:690px) and (max-width:700px){
+ #title-screen{padding:20px 22px;gap:12px}.title-content{gap:14px}
+ .title-emblem{height:135px}.title-note{width:40px}.title-kicker{margin-bottom:8px}
+ .title-edition{font-size:16px;margin-top:8px}.title-controls{gap:10px}#title-start{min-height:68px;padding:10px}
+ .title-footer{padding-top:8px}.song-list{grid-auto-rows:102px}.song-card{height:102px;min-height:102px}
+ .card-title{font-size:15px}.card-category{font-size:10px}.grade-block small{font-size:10px}
+ .selection-info h2{font-size:18px;margin:0;line-height:1.4}
+ .selection-actions{flex-shrink:0}.selection-actions #start{min-height:48px;box-shadow:none}
+}
+@media(max-height:520px) and (min-width:701px){
+ #title-screen{padding:22px 36px;gap:12px}.title-content{grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);grid-template-areas:'brand emblem' 'controls emblem';gap:12px 40px}
+ .title-emblem{height:240px}.title-kicker{font-size:14px;margin-bottom:8px}#title-logo{font-size:56px}.title-edition{font-size:16px;margin-top:8px}
+ .title-controls{gap:10px;max-width:370px}#title-start{min-height:60px;padding:8px}#title-start strong{font-size:28px}#title-start small{font-size:14px}
+ .title-shortcuts button{min-height:42px}.title-footer{padding-top:8px}.title-note{width:46px}
+ .panel.song-panel{padding:12px;gap:8px}.arcade-top{padding-bottom:6px}.arcade-filters button{min-height:36px;padding:6px 14px}
+ .song-list{grid-auto-rows:124px}.song-card{height:124px;min-height:124px}
+ .card-category{display:none}.card-information{padding:8px 10px;gap:3px}
+ .card-title{font-size:16px;line-height:1.25;flex-shrink:0}.card-artist{font-size:12px;line-height:1.2;flex-shrink:0}
+ .card-bottom{padding-top:0}.level-block{padding:3px 5px}.level-block strong{font-size:25px}.level-block small,.level-block em{font-size:11px}
+ .grade-block small{font-size:11px}.grade-block strong{font-size:18px}
+ .arcade-bottom{padding:8px;gap:6px}
+ .selection-info{flex:0 0 auto;min-height:0;max-height:none}
+ .selection-info h2{font-size:18px;line-height:1.35;margin:0}
+ .detail-eyebrow,#selected-cover,#track-tag,#track-description,#track-artist,.selection-meta,.music-credit,.video-help{display:none}
+ .selection-actions{display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:0;border:0;flex-shrink:0}
+ .selection-actions .options{grid-column:1/-1;margin:0;gap:4px;align-items:center;flex-wrap:nowrap;font-size:12px}
+ .selection-actions .options>label{white-space:nowrap}
+ .difficulty-control>span{display:none}.difficulty-buttons button{font-size:14px;min-height:36px;padding:6px 3px}
+ .selection-actions .preview-button{min-height:40px;padding:8px;margin:0!important;font-size:14px}
+ .selection-actions #start{grid-column:1/-1;min-height:48px;margin:0;padding:6px;box-shadow:none}
+ .song-panel .start strong{font-size:26px}.song-panel .start small{display:none}
+ .selection-actions #load-status{grid-column:1/-1;margin:0;font-size:12px}.selection-actions #load-status:empty{display:none}
+}
+@media(max-width:480px){.mi-summary{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(prefers-reduced-motion:reduce){button{transition:none}}
+
+/* Selection and entry screens show controls and track data without explanatory copy. */
+#official-tools #import-status:empty,#title-status:empty{display:none}
+
+/* The video-song catalog has a header and workspace, with no category row. */
+.panel.song-panel{grid-template-rows:auto minmax(0,1fr)}
+@media(max-width:700px){.arcade-top-actions{grid-template-columns:repeat(2,minmax(0,1fr))}}

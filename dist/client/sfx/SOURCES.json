@@ -1,0 +1,134 @@
+{
+  "wood": {
+    "kick": {
+      "file": "wood-kick.wav",
+      "source": "sfx-source/impact-sounds/Audio/impactWood_heavy_000.ogg",
+      "seconds": 0.2
+    },
+    "snare": {
+      "file": "wood-snare.wav",
+      "source": "sfx-source/impact-sounds/Audio/impactWood_medium_001.ogg",
+      "seconds": 0.2
+    },
+    "hat": {
+      "file": "wood-hat.wav",
+      "source": "sfx-source/impact-sounds/Audio/impactWood_light_000.ogg",
+      "seconds": 0.12
+    },
+    "tom": {
+      "file": "wood-tom.wav",
+      "source": "sfx-source/impact-sounds/Audio/impactPlank_medium_000.ogg",
+      "seconds": 0.2
+    }
+  },
+  "metal": {
+    "kick": {
+      "file": "metal-kick.wav",
+      "source": "sfx-source/impact-sounds/Audio/impactMetal_medium_000.ogg",
+      "seconds": 0.2
+    },
+    "snare": {
+      "file": "metal-snare.wav",
+      "source": "sfx-source/impact-sounds/Audio/impactMetal_light_001.ogg",
+      "seconds": 0.2
+    },
+    "hat": {
+      "file": "metal-hat.wav",
+      "source": "sfx-source/impact-sounds/Audio/impactTin_medium_000.ogg",
+      "seconds": 0.12
+    },
+    "tom": {
+      "file": "metal-tom.wav",
+      "source": "sfx-source/impact-sounds/Audio/impactPlate_light_000.ogg",
+      "seconds": 0.2
+    }
+  },
+  "glass": {
+    "kick": {
+      "file": "glass-kick.wav",
+      "source": "sfx-source/impact-sounds/Audio/impactGlass_medium_000.ogg",
+      "seconds": 0.2
+    },
+    "snare": {
+      "file": "glass-snare.wav",
+      "source": "sfx-source/impact-sounds/Audio/impactGlass_light_001.ogg",
+      "seconds": 0.2
+    },
+    "hat": {
+      "file": "glass-hat.wav",
+      "source": "sfx-source/impact-sounds/Audio/impactGlass_light_002.ogg",
+      "seconds": 0.12
+    },
+    "tom": {
+      "file": "glass-tom.wav",
+      "source": "sfx-source/impact-sounds/Audio/impactGlass_medium_002.ogg",
+      "seconds": 0.2
+    }
+  },
+  "click": {
+    "kick": {
+      "file": "click-kick.wav",
+      "source": "sfx-source/interface-sounds/Audio/click_001.ogg",
+      "seconds": 0.0971
+    },
+    "snare": {
+      "file": "click-snare.wav",
+      "source": "sfx-source/interface-sounds/Audio/click_002.ogg",
+      "seconds": 0.0116
+    },
+    "hat": {
+      "file": "click-hat.wav",
+      "source": "sfx-source/interface-sounds/Audio/tick_001.ogg",
+      "seconds": 0.045
+    },
+    "tom": {
+      "file": "click-tom.wav",
+      "source": "sfx-source/interface-sounds/Audio/switch_001.ogg",
+      "seconds": 0.2
+    }
+  },
+  "soft": {
+    "kick": {
+      "file": "soft-kick.wav",
+      "source": "sfx-source/impact-sounds/Audio/impactSoft_heavy_000.ogg",
+      "seconds": 0.2
+    },
+    "snare": {
+      "file": "soft-snare.wav",
+      "source": "sfx-source/impact-sounds/Audio/impactSoft_medium_001.ogg",
+      "seconds": 0.1804
+    },
+    "hat": {
+      "file": "soft-hat.wav",
+      "source": "sfx-source/impact-sounds/Audio/impactGeneric_light_000.ogg",
+      "seconds": 0.12
+    },
+    "tom": {
+      "file": "soft-tom.wav",
+      "source": "sfx-source/impact-sounds/Audio/impactPunch_medium_000.ogg",
+      "seconds": 0.2
+    }
+  },
+  "pluck": {
+    "kick": {
+      "file": "pluck-kick.wav",
+      "source": "sfx-source/interface-sounds/Audio/pluck_001.ogg",
+      "seconds": 0.0995
+    },
+    "snare": {
+      "file": "pluck-snare.wav",
+      "source": "sfx-source/interface-sounds/Audio/pluck_002.ogg",
+      "seconds": 0.1617
+    },
+    "hat": {
+      "file": "pluck-hat.wav",
+      "source": "sfx-source/interface-sounds/Audio/select_001.ogg",
+      "seconds": 0.0404
+    },
+    "tom": {
+      "file": "pluck-tom.wav",
+      "source": "sfx-source/interface-sounds/Audio/bong_001.ogg",
+      "seconds": 0.1199
+    }
+  }
+}

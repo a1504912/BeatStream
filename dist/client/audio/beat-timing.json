@@ -1,0 +1,38 @@
+{
+  "asunoyozora": {
+    "bpm": 185,
+    "phase": 0.063,
+    "duration": 180.2449,
+    "counts": {
+      "normal": 312,
+      "hard": 629
+    }
+  },
+  "shining": {
+    "bpm": 158,
+    "phase": 0.015,
+    "duration": 94.511,
+    "counts": {
+      "normal": 132,
+      "hard": 255
+    }
+  },
+  "halzion": {
+    "bpm": 152,
+    "phase": 0.012,
+    "duration": 92.9437,
+    "counts": {
+      "normal": 132,
+      "hard": 248
+    }
+  },
+  "12345": {
+    "bpm": 195,
+    "phase": 0.025,
+    "duration": 92.6824,
+    "counts": {
+      "normal": 170,
+      "hard": 307
+    }
+  }
+}

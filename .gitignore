@@ -1,0 +1,20 @@
+.sites-runtime/
+node_modules/
+
+# Local files and credentials
+.env
+.env.*
+!.env.example
+!.env.sample
+.dev.vars
+.dev.vars.*
+.wrangler/
+*.log
+*.sqlite
+*.sqlite-*
+*.db
+*.db-*
+.DS_Store
+Thumbs.db
+__pycache__/
+*.pyc

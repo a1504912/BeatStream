@@ -1,0 +1,73 @@
+Music: MaouDamashii (魔王魂) / Koichi Morita (森田交一)
+Composer and lyricist: 森田交一
+
+シャイニングスター / vocal: 詩歩 / 158 BPM
+https://maou.audio/14_shining_star/
+Source: https://maou.audio/sound/song/maou_short_14_shining_star.mp3
+
+ハルジオン / vocal: KEI / 152 BPM
+https://maou.audio/05_halzion/
+Source: https://maou.audio/sound/song/maou_short_05_halzion.mp3
+
+12345 / vocal: Mary / 195 BPM
+https://maou.audio/19_12345/
+Source: https://maou.audio/sound/song/maou_short_19_12345.mp3
+
+License: Creative Commons Attribution 4.0 International
+https://creativecommons.org/licenses/by/4.0/
+Official terms: https://maou.audio/rule/
+Official short-version audio used without modification. Custom rhythm charts added for this game; these are not official BeatStream charts. Song preview plays a 15-second excerpt. No endorsement by the artists is implied.
+
+Additional user-supplied recording:
+アスノヨゾラ哨戒班 / ゆある cover (performer/version based on uploaded filename).
+Source: user-uploaded MP3, added unchanged for this private game.
+This recording is separate from the MaouDamashii tracks above and is NOT covered by their CC BY license. Custom NORMAL/HARD rhythm charts generated from timing analysis; not official BeatStream charts.
+
+CHERNOBOG · VIDEO / user-supplied BeatStream cabinet recording
+Source: 【BeatStreamアニムトライヴ】CHERNOBOG(BEAST) PERFECT_720p60.mp4
+Source segment: 15.000–127.000 seconds; 192 kbps stereo MP3, one-second ending fade.
+The recording contains the original gameplay hit sounds; it is not an isolated soundtrack
+and is not covered by the MaouDamashii CC BY license. Included for this private game.
+The video-reference chart uses 60 fps trajectory/Ripple tracking, reviewed hold
+boundaries and a 200 BPM grid. Selected continuous STREAM routes are adapted to
+direction-free FLICK. It is approximate and is not an official complete chart.
+
+パ→ピ→プ→Yeah! / user-supplied BeatStream cabinet recording
+Source: BeatStream   パ→ピ→プ→Yeah! NIGHTMARE Lv10_480p.mp4
+Source segment: 15.000–121.000 seconds; 192 kbps stereo MP3, one-second ending fade.
+This recording contains gameplay hit sounds; it is not an isolated soundtrack
+and is not covered by the MaouDamashii CC BY license. Included for this private game.
+The 480p/30 fps video-reference chart uses radial trajectories, recording-derived
+circular/square silhouette masks and multiscale Ripple templates on a 160 BPM grid.
+Reviewed hold boundaries retain the diagonal and cross four-key phrases. Selected
+STREAM hooks and mirrored X routes are adapted to direction-free FLICK. Shared-key
+conflicts are reduced after projection. It is approximate, not an official full chart.
+
+天ノ弱 / 164 feat. GUMI / user-supplied clean soundtrack
+Audio source: 天ノ弱／164 feat.GUMI（公式)_320k.mp3 (192.936 s), supplied by the user.
+Chart reference: BeatStream 天ノ弱 BEAST Lv09_480p.mp4, also supplied by the user.
+Playable audio: 109-second clean MP3 edit, matching recording time 10–119 s.
+ALL output samples come from the clean MP3; cabinet hit sounds and PERFECT / FULL
+COMBO announcements from the video are never mixed into this track.
+Four affine source segments, 24 ms crossfades, 84% gain for encoder headroom and
+a short ending fade are recorded
+in tools/amanojaku/audio-edit.json and amanojaku-chart.json. Stable vocal sections
+use waveform alignment; repeated instrumental phrases/outro use spectral matching
+and phrase continuity. Those instrumental splice points are estimates.
+This recording is included for the private game and is not covered by the
+MaouDamashii CC BY license. The 480p/30 fps video-reference chart preserves reviewed
+hold pairs and six-position Ripples, and adapts selected STREAM paths to
+direction-free FLICK. It is approximate, not an official complete cabinet chart.
+
+回レ！雪月花 / 歌組雪月花 / user-supplied clean soundtrack
+Audio source: Unbreakable Machine Doll -- Official Closing_320k.mp3 (90.048 s).
+Chart reference: 【BeatStream】回レ！雪月花 BEAST_1080p.mp4, supplied by the user.
+Playable audio is a byte-for-byte copy of the separate MP3. No recording hit
+sounds or end-of-play announcements are extracted or mixed into it. Nine
+waveform correlation anchors align the footage clock to the clean audio clock;
+chart arrivals are converted to that clock, leaving the MP3 unchanged.
+Source SHA256 and clock fit: tools/setsugekka/audio-alignment.json.
+The 29.97 fps footage reference preserves reviewed hold groups and fixed Ripples;
+square swipe notes are direction-free FLICK. It is approximate, not an official
+complete cabinet chart. Included for this private game; this soundtrack is
+separate from the MaouDamashii CC BY material above.

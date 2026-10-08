@@ -1,0 +1,7 @@
+reference-hit.wav
+Source: user-supplied 【BeatStream】ナイト・オブ・ナイツ [BEAST] PERFECT_1080p.mp4
+Short transient around 50.894 seconds, processed by local spectral subtraction,
+550–10000 Hz band-pass filtering, 75 ms trim and tail fade, peak 0.94.
+The recording contains mixed gameplay and music. This is a processed recording
+excerpt, not an isolated official game asset. The same attack is used for all
+four chart percussion slots to maintain a consistent hit sound.

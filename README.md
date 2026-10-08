@@ -2,12 +2,6 @@
 
 本次完整原始碼匯出：先閱讀 [START_HERE.md](START_HERE.md)，內含本機啟動、Git 上傳及備份範圍。
 
-## 譜面製作交接
-
-- [譜面製作與遊戲判定完整說明](docs/CHART_AUTHORING_GUIDE.zh-TW.md)：影片辨識、音訊對齊、五種符號、曲線、計分及公平比較。
-- [可交給 Claude 的任務指令](docs/CLAUDE_CHART_TASK.zh-TW.md)：獨立重建與交付要求。
-- [JSON 格式示範](docs/examples/example-chart-v3.json)：五種符號與整條曲線，不是歌曲還原譜。
-
 觸控、滑鼠與鍵盤音樂遊戲。程式直接寫在 `dist/client/`，這裡的 JavaScript 與 CSS 就是可編輯的原始碼；目前沒有框架編譯流程。
 
 ## 目前功能

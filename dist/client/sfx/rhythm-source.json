@@ -1,0 +1,132 @@
+{
+  "description": "Original short, dry percussion kits with bundled Kenney CC0 attack layers.",
+  "sampleRate": 48000,
+  "kits": {
+    "rhythm": {
+      "beat": {
+        "file": "rhythm-beat.wav",
+        "seconds": 0.09,
+        "energy95ms": 20.4,
+        "peak": 0.78,
+        "rms": 0.1758
+      },
+      "ripple": {
+        "file": "rhythm-ripple.wav",
+        "seconds": 0.085,
+        "energy95ms": 13.9,
+        "peak": 0.78,
+        "rms": 0.1206
+      },
+      "slash": {
+        "file": "rhythm-slash.wav",
+        "seconds": 0.1,
+        "energy95ms": 26.3,
+        "peak": 0.78,
+        "rms": 0.1201
+      },
+      "long": {
+        "file": "rhythm-long.wav",
+        "seconds": 0.12,
+        "energy95ms": 23.2,
+        "peak": 0.78,
+        "rms": 0.1321
+      },
+      "long-start": {
+        "file": "rhythm-long-start.wav",
+        "seconds": 0.105,
+        "energy95ms": 39.0,
+        "peak": 0.78,
+        "rms": 0.2467
+      }
+    },
+    "pulse": {
+      "beat": {
+        "file": "pulse-beat.wav",
+        "seconds": 0.0675,
+        "energy95ms": 19.9,
+        "peak": 0.78,
+        "rms": 0.1608
+      },
+      "ripple": {
+        "file": "pulse-ripple.wav",
+        "seconds": 0.06375,
+        "energy95ms": 13.6,
+        "peak": 0.78,
+        "rms": 0.1358
+      },
+      "slash": {
+        "file": "pulse-slash.wav",
+        "seconds": 0.075,
+        "energy95ms": 20.1,
+        "peak": 0.78,
+        "rms": 0.1001
+      },
+      "long": {
+        "file": "pulse-long.wav",
+        "seconds": 0.09,
+        "energy95ms": 20.7,
+        "peak": 0.78,
+        "rms": 0.1218
+      },
+      "long-start": {
+        "file": "pulse-long-start.wav",
+        "seconds": 0.07875,
+        "energy95ms": 35.4,
+        "peak": 0.78,
+        "rms": 0.1832
+      }
+    },
+    "heavy": {
+      "beat": {
+        "file": "heavy-beat.wav",
+        "seconds": 0.1035,
+        "energy95ms": 30.5,
+        "peak": 0.78,
+        "rms": 0.1647
+      },
+      "ripple": {
+        "file": "heavy-ripple.wav",
+        "seconds": 0.09775,
+        "energy95ms": 33.2,
+        "peak": 0.78,
+        "rms": 0.1438
+      },
+      "slash": {
+        "file": "heavy-slash.wav",
+        "seconds": 0.115,
+        "energy95ms": 35.3,
+        "peak": 0.78,
+        "rms": 0.1597
+      },
+      "long": {
+        "file": "heavy-long.wav",
+        "seconds": 0.138,
+        "energy95ms": 33.9,
+        "peak": 0.78,
+        "rms": 0.1725
+      },
+      "long-start": {
+        "file": "heavy-long-start.wav",
+        "seconds": 0.12075,
+        "energy95ms": 37.6,
+        "peak": 0.78,
+        "rms": 0.2209
+      }
+    }
+  },
+  "sources": {
+    "synthesis": "Original deterministic noise, modal percussion and envelopes.",
+    "layers": [
+      "metal-hat.wav",
+      "wood-hat.wav",
+      "wood-kick.wav",
+      "wood-snare.wav",
+      "wood-tom.wav"
+    ],
+    "license": "Kenney layers: CC0 1.0",
+    "sourceUrls": [
+      "https://kenney.nl/assets/impact-sounds",
+      "https://kenney.nl/assets/interface-sounds"
+    ]
+  }
+}

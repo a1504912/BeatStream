@@ -1,0 +1,53 @@
+{
+  "source": "【BeatStream】Tutorial チュートリアル Arcade 20170831_720p60.mp4",
+  "kind": "user-provided arcade microphone recording",
+  "note": "Visual and audio times differ in the recording. Samples align to audio transients, not visual frame times. Background music/room sound can remain.",
+  "processing": "65 Hz rumble filter, conservative spectral suppression using a matching music passage, 1 ms/14 ms fades, peak 0.88, mono PCM16 44.1 kHz",
+  "samples": {
+    "beat": {
+      "onset": 245.8013,
+      "duration": 0.235,
+      "background": 253.8045,
+      "visual": "04:05.5",
+      "event": "single pink Beat success",
+      "file": "tutorial-beat.wav",
+      "rawFile": "tutorial-beat-raw.wav"
+    },
+    "slash": {
+      "onset": 157.7812,
+      "duration": 0.285,
+      "background": 165.7844,
+      "visual": "02:37.5",
+      "event": "upper-left green diamond swipe and lightning",
+      "file": "tutorial-slash.wav",
+      "rawFile": "tutorial-slash-raw.wav"
+    },
+    "ripple": {
+      "onset": 181.7862,
+      "duration": 0.285,
+      "background": 165.7798,
+      "visual": "03:01.5",
+      "event": "upper-right shrinking ring tap",
+      "file": "tutorial-ripple.wav",
+      "rawFile": "tutorial-ripple-raw.wav"
+    },
+    "long": {
+      "onset": 264.8388,
+      "duration": 0.26,
+      "background": 256.8356,
+      "visual": "04:24.5",
+      "event": "upper-left Long tail finishes while held",
+      "file": "tutorial-long.wav",
+      "rawFile": "tutorial-long-raw.wav"
+    },
+    "long-start": {
+      "onset": 257.8363,
+      "duration": 0.2,
+      "background": 249.8331,
+      "visual": "04:17.5",
+      "event": "left Long head contact",
+      "file": "tutorial-long-start.wav",
+      "rawFile": "tutorial-long-start-raw.wav"
+    }
+  }
+}

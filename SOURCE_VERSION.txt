@@ -1,0 +1,12 @@
+BeatStream · Neon Session
+Export date: 2026-10-08 (Asia/Taipei)
+Sites version: 60
+Source commit: f06da1c69fdd205a72c3b76146c301f5a547db91
+Source files: 238
+Site: https://beatstream-neon-play.chuanjui108.chatgpt.site
+
+All tracked source files and bundled assets are included.
+Added export documentation: START_HERE.md and SOURCE_VERSION.txt.
+.git, node_modules, preview data and hosted user data are not included.
+.gitignore has extra local-data and credential exclusions.
+README.md includes corrected local-run instructions and a START_HERE link.

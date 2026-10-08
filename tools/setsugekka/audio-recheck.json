@@ -1,0 +1,55 @@
+{
+  "sourceRate": 1.0000840198464709,
+  "sourceOffset": -9.665998980631981,
+  "anchors": [
+    {
+      "video": 12,
+      "clean": 2.335011337868481,
+      "correlation": 0.6669535195904641
+    },
+    {
+      "video": 20,
+      "clean": 10.335691609977324,
+      "correlation": 0.847676025424365
+    },
+    {
+      "video": 32,
+      "clean": 22.336689342403627,
+      "correlation": 0.8883775087911981
+    },
+    {
+      "video": 44,
+      "clean": 34.33768707482993,
+      "correlation": 0.6150892768862561
+    },
+    {
+      "video": 56,
+      "clean": 46.338684807256236,
+      "correlation": 0.9023915888304248
+    },
+    {
+      "video": 68,
+      "clean": 58.339727891156464,
+      "correlation": 0.8275951529963773
+    },
+    {
+      "video": 80,
+      "clean": 70.34072562358277,
+      "correlation": 0.9008604977439967
+    },
+    {
+      "video": 88,
+      "clean": 78.34140589569161,
+      "correlation": 0.9119629364202677
+    },
+    {
+      "video": 92,
+      "clean": 82.34172335600907,
+      "correlation": 0.7487123343094853
+    }
+  ],
+  "maximumResidualSeconds": 2.1323514154403256e-05,
+  "audioSHA256": "d781c438d35c9332b9ead91d780e0f4e1d2edc39df14652cfb4cfd01e69b42cb",
+  "videoSHA256": "06ef1a7fbf4c954ce6fc3a22124b56d1535873ed10eb4c65c66946c0b7c1e0fb",
+  "method": "Fresh decoding of both supplied files; normalized 350\u20131800 Hz waveform correlation in nine separated 1.3-second windows. This is an alignment check; playback uses the supplied clean MP3."
+}

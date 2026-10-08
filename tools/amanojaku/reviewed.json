@@ -1,0 +1,307 @@
+{
+  "holds": [
+    {
+      "start": 32.0175,
+      "end": 33.075,
+      "lanes": [
+        4
+      ]
+    },
+    {
+      "start": 33.0717,
+      "end": 34.42693,
+      "lanes": [
+        0
+      ]
+    },
+    {
+      "start": 34.4179,
+      "end": 35.32372,
+      "lanes": [
+        4
+      ]
+    },
+    {
+      "start": 43.136,
+      "end": 43.44872,
+      "lanes": [
+        7
+      ]
+    },
+    {
+      "start": 47.92,
+      "end": 48.22949,
+      "lanes": [
+        7
+      ]
+    },
+    {
+      "start": 54.37,
+      "end": 54.82949,
+      "lanes": [
+        7
+      ]
+    },
+    {
+      "start": 60.849,
+      "end": 61.3077,
+      "lanes": [
+        2
+      ]
+    },
+    {
+      "start": 60.838,
+      "end": 61.29488,
+      "lanes": [
+        7
+      ]
+    },
+    {
+      "start": 62.641,
+      "end": 63.10898,
+      "lanes": [
+        6
+      ]
+    },
+    {
+      "start": 62.641,
+      "end": 63.10321,
+      "lanes": [
+        1
+      ]
+    },
+    {
+      "start": 64.448,
+      "end": 64.91347,
+      "lanes": [
+        2
+      ]
+    },
+    {
+      "start": 64.432,
+      "end": 64.89295,
+      "lanes": [
+        5
+      ]
+    },
+    {
+      "start": 68.557,
+      "end": 69.42949,
+      "lanes": [
+        0
+      ]
+    },
+    {
+      "start": 70.89,
+      "end": 71.75962,
+      "lanes": [
+        0
+      ]
+    },
+    {
+      "start": 77.938,
+      "end": 78.80962,
+      "lanes": [
+        4
+      ]
+    },
+    {
+      "start": 80.268,
+      "end": 81.14231,
+      "lanes": [
+        4
+      ]
+    },
+    {
+      "start": 81.432,
+      "end": 82.02372,
+      "lanes": [
+        5
+      ]
+    },
+    {
+      "start": 81.439,
+      "end": 82.03077,
+      "lanes": [
+        0
+      ]
+    },
+    {
+      "start": 82.099,
+      "end": 82.59744,
+      "lanes": [
+        6
+      ]
+    },
+    {
+      "start": 82.099,
+      "end": 82.59744,
+      "lanes": [
+        1
+      ]
+    },
+    {
+      "start": 87.377,
+      "end": 87.82372,
+      "lanes": [
+        6
+      ]
+    },
+    {
+      "start": 87.819,
+      "end": 88.26218,
+      "lanes": [
+        7
+      ]
+    },
+    {
+      "start": 89.709,
+      "end": 90.14744,
+      "lanes": [
+        7
+      ]
+    },
+    {
+      "start": 96.731,
+      "end": 97.17885,
+      "lanes": [
+        2
+      ]
+    },
+    {
+      "start": 97.172,
+      "end": 97.61923,
+      "lanes": [
+        1
+      ]
+    },
+    {
+      "start": 99.098,
+      "end": 99.54616,
+      "lanes": [
+        2
+      ]
+    },
+    {
+      "start": 106.789,
+      "end": 107.08462,
+      "lanes": [
+        1
+      ]
+    },
+    {
+      "start": 107.233,
+      "end": 107.52949,
+      "lanes": [
+        2
+      ]
+    },
+    {
+      "start": 109.165,
+      "end": 109.46411,
+      "lanes": [
+        5
+      ]
+    },
+    {
+      "start": 111.553,
+      "end": 111.84744,
+      "lanes": [
+        7
+      ]
+    },
+    {
+      "start": 112.01,
+      "end": 112.30962,
+      "lanes": [
+        6
+      ]
+    },
+    {
+      "start": 116.791,
+      "end": 117.0859,
+      "lanes": [
+        1
+      ]
+    }
+  ],
+  "routes": [
+    {
+      "start": 35.425,
+      "spacing": 0.15,
+      "lanes": [
+        1,
+        0,
+        7
+      ]
+    },
+    {
+      "start": 35.425,
+      "spacing": 0.15,
+      "lanes": [
+        5,
+        4,
+        3
+      ]
+    },
+    {
+      "start": 69.79,
+      "spacing": 0.1463,
+      "lanes": [
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "start": 78.825,
+      "spacing": 0.1463,
+      "lanes": [
+        7,
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "start": 104.99,
+      "spacing": 0.1492,
+      "lanes": [
+        1,
+        0,
+        7,
+        6
+      ]
+    },
+    {
+      "start": 109.68,
+      "spacing": 0.1492,
+      "lanes": [
+        3,
+        4,
+        5,
+        6
+      ]
+    }
+  ],
+  "tempoObservation": [
+    {
+      "videoTime": 12,
+      "bpm": 200
+    },
+    {
+      "videoTime": 66,
+      "bpm": 202
+    },
+    {
+      "videoTime": 68,
+      "bpm": 205
+    },
+    {
+      "videoTime": 102,
+      "bpm": 201
+    }
+  ],
+  "note": "Reviewed source frames, projected to the existing eight perimeter directions. Hold endpoints use moving tail-cap fits with a 12 px rim correction. Selected STREAM paths become direction-free FLICK, as requested. Original cabinet count 621 is not a target count after adaptation."
+}

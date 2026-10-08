@@ -1,0 +1,66 @@
+{
+  "sourceRate": 1.0000842885574208,
+  "sourceOffset": -9.666023748269238,
+  "anchors": [
+    {
+      "video": 12,
+      "clean": 2.334965986394558,
+      "offset": -9.665034013605442,
+      "correlation": 0.5505865165934419
+    },
+    {
+      "video": 20,
+      "clean": 10.335691609977324,
+      "offset": -9.664308390022676,
+      "correlation": 0.7420938422011543
+    },
+    {
+      "video": 32,
+      "clean": 22.336689342403627,
+      "offset": -9.663310657596373,
+      "correlation": 0.8086106665474982
+    },
+    {
+      "video": 44,
+      "clean": 34.33768707482993,
+      "offset": -9.66231292517007,
+      "correlation": 0.5137354430214501
+    },
+    {
+      "video": 56,
+      "clean": 46.338684807256236,
+      "offset": -9.661315192743764,
+      "correlation": 0.8207359492975308
+    },
+    {
+      "video": 68,
+      "clean": 58.33968253968254,
+      "offset": -9.660317460317458,
+      "correlation": 0.7215112656619127
+    },
+    {
+      "video": 80,
+      "clean": 70.34068027210884,
+      "offset": -9.659319727891159,
+      "correlation": 0.8145355047645905
+    },
+    {
+      "video": 88,
+      "clean": 78.34140589569161,
+      "offset": -9.658594104308392,
+      "correlation": 0.8361036982296692
+    },
+    {
+      "video": 92,
+      "clean": 82.341768707483,
+      "offset": -9.658231292517002,
+      "correlation": 0.6083912201767806
+    }
+  ],
+  "sourceAudio": "Unbreakable Machine Doll -- Official Closing_320k.mp3",
+  "sourceAudioDuration": 90.048,
+  "videoTimeAtAudioStart": 9.665209081738567,
+  "videoTimeAtAudioEnd": 99.70561970541752,
+  "method": "Band-limited normalized waveform correlation at nine separated vocal/instrumental windows. All windows fit one source clock; no edits or mixing required. Convert chart arrivals to clean audio time using clean=video*sourceRate+sourceOffset. Output audio is a byte-for-byte copy of the supplied clean MP3, with no cabinet audio or completion announcement.",
+  "sourceSHA256": "d781c438d35c9332b9ead91d780e0f4e1d2edc39df14652cfb4cfd01e69b42cb"
+}

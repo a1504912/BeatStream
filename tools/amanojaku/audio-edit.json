@@ -1,0 +1,198 @@
+{
+  "sourceAudio": "User-supplied 天ノ弱／164 feat.GUMI（公式)_320k.mp3",
+  "sourceAudioDuration": 192.936,
+  "outputTrimStartInVideo": 10,
+  "outputDuration": 109,
+  "sampleRate": 48000,
+  "channels": 2,
+  "crossfadeSeconds": 0.024,
+  "fadeOutInVideo": 118.3,
+  "segments": [
+    {
+      "videoStart": 10,
+      "videoEnd": 36.8375,
+      "sourceRate": 1.0001107201707178,
+      "sourceOffset": -8.016078302121539
+    },
+    {
+      "videoStart": 36.8375,
+      "videoEnd": 86.74,
+      "sourceRate": 1.0000860238764055,
+      "sourceOffset": 1.584694337816669
+    },
+    {
+      "videoStart": 86.74,
+      "videoEnd": 112.3075,
+      "sourceRate": 1.000056705414143,
+      "sourceOffset": 58.786164423497596
+    },
+    {
+      "videoStart": 112.3075,
+      "videoEnd": 119,
+      "sourceRate": 1,
+      "sourceOffset": 68.357
+    }
+  ],
+  "method": "Video is used only for chart observation and timing analysis. All output samples come from the supplied clean MP3. Stable vocal sections aligned by band-limited waveform correlation; repeated guitar sections/outro aligned by magnitude-band fingerprints and musical phrase continuity. Piecewise affine source clock preserves the arcade edit; boundaries inside repeated instrumental phrases are estimates, not an official edit.",
+  "waveformAnchors": [
+    {
+      "video": 12.0,
+      "clean": 3.9853968253968253,
+      "correlation": 0.48443938503257783,
+      "offset": -8.014603174603174
+    },
+    {
+      "video": 20.0,
+      "clean": 11.986122448979591,
+      "correlation": 0.5077565786075773,
+      "offset": -8.013877551020409
+    },
+    {
+      "video": 30.0,
+      "clean": 21.986938775510204,
+      "correlation": 0.3095833172701496,
+      "offset": -8.013061224489796
+    },
+    {
+      "video": 45.0,
+      "clean": 46.58857142857143,
+      "correlation": 0.7261076170854004,
+      "offset": 1.5885714285714272
+    },
+    {
+      "video": 60.0,
+      "clean": 61.58984126984127,
+      "correlation": 0.5511118603910011,
+      "offset": 1.5898412698412727
+    },
+    {
+      "video": 80.0,
+      "clean": 81.59165532879818,
+      "correlation": 0.46178141206571,
+      "offset": 1.5916553287981827
+    },
+    {
+      "video": 90.0,
+      "clean": 148.79102040816326,
+      "correlation": 0.5045870251720894,
+      "offset": 58.79102040816326
+    },
+    {
+      "video": 100.0,
+      "clean": 158.79192743764173,
+      "correlation": 0.6103941530097262,
+      "offset": 58.79192743764173
+    },
+    {
+      "video": 110.0,
+      "clean": 168.79201814058956,
+      "correlation": 0.562303767830538,
+      "offset": 58.79201814058956
+    }
+  ],
+  "spectralOutroAnchors": [
+    {
+      "video": 112.5,
+      "matches": [
+        [
+          180.837,
+          0.4846
+        ],
+        [
+          171.3168,
+          0.4518
+        ],
+        [
+          176.0769,
+          0.433
+        ],
+        [
+          166.5567,
+          0.4268
+        ],
+        [
+          170.5506,
+          0.4128
+        ]
+      ]
+    },
+    {
+      "video": 113,
+      "matches": [
+        [
+          181.3711,
+          0.5438
+        ],
+        [
+          171.8277,
+          0.481
+        ],
+        [
+          176.5878,
+          0.4579
+        ],
+        [
+          182.2534,
+          0.4508
+        ],
+        [
+          181.8122,
+          0.448
+        ]
+      ]
+    },
+    {
+      "video": 114,
+      "matches": [
+        [
+          182.3695,
+          0.6086
+        ],
+        [
+          181.9283,
+          0.5146
+        ],
+        [
+          172.2456,
+          0.5048
+        ],
+        [
+          182.8107,
+          0.4666
+        ],
+        [
+          181.4639,
+          0.4659
+        ]
+      ]
+    },
+    {
+      "video": 115,
+      "matches": [
+        [
+          183.368,
+          0.5769
+        ],
+        [
+          172.8029,
+          0.5078
+        ],
+        [
+          172.3385,
+          0.5012
+        ],
+        [
+          182.7643,
+          0.4899
+        ],
+        [
+          173.8246,
+          0.4887
+        ]
+      ]
+    }
+  ],
+  "instrumentalCutUncertaintySeconds": 0.15,
+  "gain": 0.84,
+  "gainPurpose": "Preserve encoder headroom for the supplied MP3 decoded true peaks above 1.0"
+}
