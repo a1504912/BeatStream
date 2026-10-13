@@ -1,0 +1,18 @@
+{
+  "sourceAudio": "User-supplied 幸せになれる隠しコマンドがあるらしい / Yuzuki Yukari, UtataP (Original) 320k MP3",
+  "sourceAudioDuration": 226.104,
+  "sampleRate": 48000,
+  "outputDuration": 127.5,
+  "crossfadeSeconds": 0.024,
+  "bpm": 142,
+  "beatPhaseSeconds": 0.10986,
+  "segments": [
+    {"gameStart": 0, "gameEnd": 42.7855, "sourceStart": 0},
+    {"gameStart": 42.7855, "gameEnd": 49.5485, "sourceStart": 83.3489},
+    {"gameStart": 49.5485, "gameEnd": 56.727, "sourceStart": 103.633},
+    {"gameStart": 56.727, "gameEnd": 127.5, "sourceStart": 152.2199}
+  ],
+  "videoClock": {"rate": 1.000081, "offset": -14.95668, "formula": "gameTime = rate * videoTime + offset"},
+  "waveformAnchors": {"segment1": {"videoRange": [15.5, 51], "medianSourceMinusVideo": -14.95401, "spread": 0.0028, "count": 18}, "segment2": {"videoRange": [57, 63], "medianSourceMinusVideo": 25.61154, "spread": 0.0003, "count": 3}, "segment3": {"videoRange": [66, 70], "medianSourceMinusVideo": 39.13331, "spread": 0.0002, "count": 2}, "segment4": {"videoRange": [72, 136], "medianSourceMinusVideo": 80.5444, "spread": 0.005, "count": 32}},
+  "method": "Video audio is used only to locate the arcade edit. All output samples come from the supplied clean MP3. Band-limited (150-4000 Hz) 1 s waveform correlation gives four constant offsets whose differences are 96, 32 and 98 beats at 142 BPM; 60 ms correlation places each cut on a beat at source 42.7855 s, 90.1119 s and 110.8115 s (cuts inside repeated phrases are estimates). The MP3 ends naturally at about 222.3 s, matching the recording. This is a reconstruction of the arcade edit, not an official audio file."
+}

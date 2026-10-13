@@ -9,10 +9,12 @@ import argparse,math
 from pathlib import Path
 import cv2,numpy as np
 p=argparse.ArgumentParser();p.add_argument('video',type=Path);p.add_argument('--out',type=Path,required=True)
-p.add_argument('--start',type=float,default=11.0);p.add_argument('--end',type=float,default=147.0);a=p.parse_args()
+p.add_argument('--start',type=float,default=11.0);p.add_argument('--end',type=float,default=147.0)
+p.add_argument('--center',type=float,nargs=2,default=[421.5,232.0])
+p.add_argument('--ripples',type=float,nargs=12,default=[268,80,573,80,674,232,573,384,268,384,174,232]);a=p.parse_args()
 a.out.mkdir(parents=True,exist_ok=True);cv2.setNumThreads(2)
-cx,cy=421.5,232.0
-RIPPLES=[(268,80),(573,80),(674,232),(573,384),(268,384),(174,232)]
+cx,cy=a.center
+RIPPLES=list(zip(a.ripples[0::2],a.ripples[1::2]))
 rs=np.arange(60,421,dtype=np.float32);qs=np.arange(-7,8,dtype=np.float32)
 lane_maps=[]
 for lane in range(8):

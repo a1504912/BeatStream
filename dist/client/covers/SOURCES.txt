@@ -61,3 +61,5 @@ amanojaku-video: jacket visible in the user-supplied BeatStream 天ノ弱 BEAST 
 setsugekka-video: jacket shown in the user-supplied 【BeatStream】回レ！雪月花 BEAST_1080p.mp4 selection frame at 0 s. Cropped from that frame for this private reference game.
 
 flandre-video: jacket shown in the user-supplied BeatStream 最終鬼畜妹フランドール・S BEAST recording, selection frame at 2 s (Movie: TOHRU MiTSUHASHi × KAgaMI; jacket credit as shown in that frame). Cropped from that frame for this private reference game.
+
+kakushi-video: jacket shown in the user-supplied BeatStream 幸せになれる隠しコマンドがあるらしい NIGHTMARE PERFECT recording, selection frame at 1 s (Movie: 結月ゆかり; Jacket: wogura as shown in that frame). Cropped from that frame for this private reference game.

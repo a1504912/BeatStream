@@ -11,22 +11,28 @@ import argparse,json
 from pathlib import Path
 import cv2,numpy as np
 p=argparse.ArgumentParser();p.add_argument('video',type=Path);p.add_argument('--out',type=Path,required=True)
-p.add_argument('--total',type=int,default=724);a=p.parse_args();a.out.mkdir(parents=True,exist_ok=True)
-X0,PITCH,W=466.5,25.2,24;T=a.total
+p.add_argument('--total',type=int,default=724)
+p.add_argument('--cells',type=float,nargs=5,default=[466.5,25.2,24,1,40],help='x0 pitch width y0 y1 of the 7 digit cells (native pixels)')
+p.add_argument('--band',type=int,nargs=3,default=[44,455,640],help='band height, left and right x')
+p.add_argument('--seed',nargs='+',default=['30.0:0071823','62.0:0323204','100.0:0709944','120.0:0856353'])
+p.add_argument('--range',type=float,nargs=2,default=[11.0,148.0])
+p.add_argument('--no-half-fix',action='store_true',help='skip the k/k+T/2 continuity fix (only needed when 3 and 8 are confused)')
+a=p.parse_args();a.out.mkdir(parents=True,exist_ok=True)
+X0,PITCH,W,Y0,Y1=a.cells;W,Y0,Y1=int(W),int(Y0),int(Y1);BH,BL,BR=a.band;T=a.total
 valid={str(round(k*1e6/T)):k for k in range(1,T+1)}
 def cells(frame):
-    hsv=cv2.cvtColor(frame[0:44,455:640],cv2.COLOR_BGR2HSV)
+    hsv=cv2.cvtColor(frame[0:BH,BL:BR],cv2.COLOR_BGR2HSV)
     m=np.pad(((hsv[...,2]>150)&(hsv[...,1]<80)).astype(np.float32),((0,0),(0,12)))
-    return [m[1:40,int(round(X0+PITCH*k))-457:int(round(X0+PITCH*k))-455+W+2] for k in range(7)]
+    return [m[Y0:Y1,int(round(X0+PITCH*k))-BL-2:int(round(X0+PITCH*k))-BL+W+2] for k in range(7)]
 cap=cv2.VideoCapture(str(a.video));fps=cap.get(cv2.CAP_PROP_FPS);frames,times=[],[];i=0
 while True:
     ok,f=cap.read()
     if not ok:break
     t=i/fps;i+=1
-    if 11.0<=t<=148.0:frames.append(cells(f));times.append(t)
+    if a.range[0]<=t<=a.range[1]:frames.append(cells(f));times.append(t)
 cap.release();times=np.array(times)
 # seed glyphs: four frames whose scores were read by eye
-seed={30.0:'0071823',62.0:'0323204',100.0:'0709944',120.0:'0856353'}
+seed={float(x.split(':')[0]):x.split(':')[1] for x in a.seed}
 def glyphs(samples):
     out={}
     for cs,text in samples:
@@ -48,7 +54,7 @@ def per_cell(cs,G):
     for j,c in enumerate(cs):
         empty=c[:,3:-3].sum()<25
         tab[j,10]=1.0 if empty else 0.0
-        for d,ch in enumerate(DIGITS):tab[j,d]=0.0 if empty else corr(c,G[ch])
+        for d,ch in enumerate(DIGITS):tab[j,d]=0.0 if empty else (corr(c,G[ch]) if ch in G else 0.3)
     return tab
 def decode(tab):
     best=None
@@ -66,6 +72,7 @@ for rnd in range(2):
 # 3 and 8 differ only in their left stroke; with 724 judgments, k and k+362
 # share the lower six digits, so resolve that one ambiguity by continuity.
 HALF=T//2;est=0;fixed=[]
+if a.no_half_fix:HALF=10**9
 for n,k in good:
     options=[c for c in (k,k-HALF,k+HALF) if 0<=c<=T]
     c=min(options,key=lambda c:abs(c-est))
