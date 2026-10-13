@@ -76,8 +76,9 @@ if a.no_half_fix:HALF=10**9
 for n,k in good:
     options=[c for c in (k,k-HALF,k+HALF) if 0<=c<=T]
     c=min(options,key=lambda c:abs(c-est))
-    if abs(c-est)<=40:fixed.append((n,c));est=c
+    if a.no_half_fix or abs(c-est)<=40:fixed.append((n,c));est=c
 good=fixed
+(a.out/'readings.json').write_text(json.dumps([[float(times[n]),k] for n,k in good]))
 # monotone count per frame: longest non-decreasing chain of accepted readings
 ns=[n for n,_ in good];ks=[k for _,k in good];import bisect
 tails,tidx,prev=[],[],[-1]*len(ks)
