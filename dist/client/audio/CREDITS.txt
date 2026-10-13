@@ -80,3 +80,12 @@ recording audio or hit sounds are mixed in. Edit map and clock fit:
 tools/flandre/audio-edit.json. The chart is a footage reference from a 360p
 29.97 fps PERFECT play, not an official complete cabinet chart. Included for
 this private game; separate from the MaouDamashii CC BY material above.
+
+kakushi-clean.mp3 — 幸せになれる隠しコマンドがあるらしい / うたたP feat. 結月ゆかり
+Built only from the user-supplied clean 320k MP3 (226.104 s). The arcade-length
+edit (127.5 s) removes three beat-aligned passages (96, 32 and 98 beats at
+142 BPM) located by correlating against the user-supplied NIGHTMARE PERFECT
+recording; cuts inside repeated phrases are estimates. No recording audio or
+hit sounds are mixed in. Edit map: tools/kakushi/audio-edit.json. The chart
+is a footage reference from a 360p 30 fps recording, not an official complete
+cabinet chart. Included for this private game.

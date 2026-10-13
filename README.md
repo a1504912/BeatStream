@@ -19,7 +19,7 @@
 - 同步遊戲預覽：播放、暫停、0.5×／0.75× 慢速、任意跳轉；修改音符立即更新。
 - 在預覽中點選音符，或在時間軸選取音符並查看到點前的畫面；到點音效可切換。
 
-選歌頁目前顯示 `最終鬼畜妹フランドール・S`、`天ノ弱`、`パ→ピ→プ→Yeah!`、`CHERNOBOG · VIDEO` 、`ロストワンの号哭` 和 `回レ！雪月花` 六首影片參考曲。`天ノ弱` 附使用者提供的乾淨 MP3 剪接；前三首保留既有錄影音軌。選曲與難度後按「編輯譜面」即可進入。舊曲與已儲存資料保留，但不再顯示；後續依使用者提供的實機影片製作並加入 `videoReference: true` 的參考曲。
+選歌頁目前顯示 `幸せになれる隠しコマンドがあるらしい`、`最終鬼畜妹フランドール・S`、`天ノ弱`、`パ→ピ→プ→Yeah!`、`CHERNOBOG · VIDEO` 、`ロストワンの号哭` 和 `回レ！雪月花` 七首影片參考曲。`天ノ弱` 附使用者提供的乾淨 MP3 剪接；前三首保留既有錄影音軌。選曲與難度後按「編輯譜面」即可進入。舊曲與已儲存資料保留，但不再顯示；後續依使用者提供的實機影片製作並加入 `videoReference: true` 的參考曲。
 
 LIGHT 沿用原譜節奏點，減少密度與同時押，以單顆點擊及少量長按為主。舊歌曲不必重傳；LIGHT 可獨立編輯及儲存至雲端。
 
@@ -60,6 +60,7 @@ JSON 版本 3 的節點可帶 `curve: {x,y}`，代表通往下一節點的控制
 | `dist/client/papipu-song.js`、`papipu-chart.json` | パ→ピ→プ→Yeah! 影片參考版、長按與路徑核對記錄 |
 | `dist/client/amanojaku-song.js`、`amanojaku-chart.json` | 天ノ弱 影片參考譜與乾淨 MP3 剪接時間對照 |
 | `dist/client/flandre-song.js`、`flandre-chart.json` | 最終鬼畜妹フランドール・S 影片參考譜、街機剪接與計分核對 |
+| `dist/client/kakushi-song.js`、`kakushi-chart.json` | 幸せになれる隠しコマンドがあるらしい 影片參考譜與 STREAM 路徑 |
 | `dist/server/index.js` | Cloudflare Worker 音樂與譜面 API |
 | `tools/` | 譜面分析與驗證程式 |
 
@@ -96,6 +97,7 @@ node tools/test-papipu.cjs
 node tools/test-amanojaku.cjs
 node tools/test-setsugekka.cjs
 node tools/test-flandre.cjs
+node tools/test-kakushi.cjs
 ```
 
 也可用 `BEATSTREAM_CANVAS_MODULE` 指定既有 Canvas 模組的位置。
@@ -133,3 +135,11 @@ node tools/test-flandre.cjs
 錄影為 1,000,000 分、724 Fantastic、740 COMBO。BEAST 720 顆（507 點擊、123 縮圈、53 方塊、32 長按、5 條 STREAM），NORMAL 453 顆，LIGHT 由 NORMAL 自動簡化。所有到點都在 200 BPM 十六分格線上；結尾保留六方向同時長按。`tools/flandre/read_score.py` 逐幀讀取 SCORE（每次判定 +1,000,000/724），用來核對數量：長按於放開時判定，STREAM 只算一次判定但每個節點加 COMBO。仍有 4 次判定找不到可信的影像音符，沒有自行補造。
 
 `python3 tools/flandre/build_chart.py` 由已核對的 `reviewed.json` 重建成品，不需要原影片；辨識流程與否決清單見 `tools/flandre/analysis/` 與 `reviewed.json`。影片推估、八方向投影與 STREAM 路徑量測不是官方完整逐顆譜。
+
+## 幸せになれる隠しコマンドがあるらしい
+
+曲目 ID `kakushi-video`（うたたP feat. 結月ゆかり），依使用者提供的 360p／30 fps NIGHTMARE PERFECT 錄影製作。`tools/kakushi/build_audio.py CLEAN_MP3 --output dist/client/audio/kakushi-clean.mp3` 只讀取 226 秒乾淨 MP3，剪去 96、32、98 拍（142 BPM、對齊拍點）成 127.5 秒街機長度；`verify_audio.py` 以 49 個窗格比對錄影音軌（最大誤差 0.19 ms）。重複樂句內的剪接點為估計。
+
+BEAST 474 顆（157 點擊、166 縮圈、39 方塊、46 長按、66 條 STREAM），NORMAL 339 顆，LIGHT 自動簡化。全部在 142 BPM 十六分格線；STREAM 依影片中的直線、橫線、對角、方框及折線路徑模板量測，結尾為兩條交叉對角 STREAM。SCORE 以 1,000,000/2420 為單位、每次判定 5 單位，推算約 484 次判定；仍有約 10 次找不到可信影像音符，沒有補造。
+
+`python3 tools/kakushi/build_chart.py` 由已核對的 `reviewed.json` 重建，不需要原影片；辨識流程見 `tools/kakushi/analysis/`。影片推估、八方向投影與 STREAM 路徑模板不是官方完整逐顆譜。

@@ -25,7 +25,7 @@
 - 操作設定在選單／對話框內，遊玩畫面維持清楚。
 - READY 由獨立的 `readyUntil` 控制 1.5 秒準備期。期間 renderer 不畫任何音符／路徑與提前提示、遊戲不接受命中或 AUTO 判定；READY 結束再保留 `2.6 / speed` 的完整音符入場時間。音樂與判定仍共用 `startAt` 時鐘及 outputLatency／同步微調補償，不能單純藏住負時間音符後在歌曲零秒突然出現。暫停使用 AudioContext 的時鐘，READY 與音訊一起凍結。
 - 選歌與開始畫面不顯示歌曲介紹、匯入檔名、來源／雲端快取說明或鍵盤操作提示。保留曲目資料、難度和操作按鈕；詳細規則由「玩法說明」開啟。
-- 選歌目前只保留影片參考曲 `flandre-video`、`amanojaku-video`、`papipu-video`、`chernobog-video` 、`lostone-video` 和 `setsugekka-video-r2`；後續由使用者提供實機影片，再製作有 `videoReference: true` 的參考曲。舊曲目只從選歌列表隱藏，保留已匯入音檔及雲端自訂譜面，重新載入後也不可把舊曲放回列表。分類列及一般媒體匯入入口已收起，保留編輯器、難度、玩法與設定。
+- 選歌目前只保留影片參考曲 `kakushi-video`、`flandre-video`、`amanojaku-video`、`papipu-video`、`chernobog-video` 、`lostone-video` 和 `setsugekka-video-r2`；後續由使用者提供實機影片，再製作有 `videoReference: true` 的參考曲。舊曲目只從選歌列表隱藏，保留已匯入音檔及雲端自訂譜面，重新載入後也不可把舊曲放回列表。分類列及一般媒體匯入入口已收起，保留編輯器、難度、玩法與設定。
 - 各符號的音效、音量與鍵盤設定必須保留。
 - 使用者重視手機排版、完整清晰的音符，以及與音樂節奏有邏輯的譜面。
 
@@ -86,3 +86,7 @@ CHERNOBOG 的影片參考版為獨立 `chernobog-video` ID，選歌名稱 `CHERN
 ## 最終鬼畜妹フランドール・S
 
 第六首 `flandre-video`（ビートまりお／COOL&CREATE）由使用者提供的 360p／29.97 fps BEAST Lv10 PERFECT 錄影與 206 秒乾淨 MP3 製作。音軌為乾淨 MP3 剪去 8／40／8 小節的 135 秒街機版（`tools/flandre/audio-edit.json`），不得換成錄影音軌。BEAST 720 顆（507 點擊、123 縮圈、53 方塊、32 長按、5 STREAM），NORMAL 453，LIGHT 自動簡化；全部在 200 BPM 十六分格線，結尾六方向長按 125.9875–131.3875 秒。錄影 724 判定／740 COMBO：長按放開才判定、STREAM 一次判定但逐節點加 COMBO；尚缺 4 次判定，不可自動補拍湊數。`reviewed.json` 是核對後的唯一來源，`build_chart.py` 不需影片即可重建。不要改動其他五首或雲端既存資料。
+
+## 幸せになれる隠しコマンドがあるらしい
+
+第七首 `kakushi-video`（うたたP feat. 結月ゆかり）由使用者提供的 360p／30 fps NIGHTMARE PERFECT 錄影與 226 秒乾淨 MP3 製作；音軌為乾淨 MP3 剪去 96／32／98 拍的 127.5 秒街機版（`tools/kakushi/audio-edit.json`），不得換成錄影音軌。BEAST 474 顆（157 點擊、166 縮圈、39 方塊、46 長按、66 STREAM），NORMAL 339，LIGHT 自動簡化；142 BPM 十六分格線。STREAM 的鍵盤 lane 依起點方向選最近且不與其他音符衝突的方向。SCORE 2420 單位、每判定 5 單位（約 484 判定），尚缺約 10 次，不可自動補拍。`reviewed.json` 是唯一核對來源，`build_chart.py` 不需影片即可重建。不要改動其他六首或雲端既存資料。
